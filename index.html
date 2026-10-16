@@ -143,6 +143,7 @@ section.blk{padding-block:56px}
 .agenda{display:grid;grid-template-columns:1fr minmax(0,360px);gap:clamp(24px,5vw,64px);align-items:center}
 .agenda-copy h2{font-size:clamp(32px,4vw,48px);margin-top:6px}
 .agenda-copy p{color:var(--soft);margin-top:12px;max-width:38ch}
+.agenda-copy .agenda-hours{color:var(--mute);font-size:14.5px;margin-top:6px}
 .car-ctrl{display:flex;align-items:center;gap:10px;margin-top:22px}
 .car-btn{width:44px;height:44px;border-radius:var(--pill);border:1px solid var(--line);background:transparent;color:var(--paper);font-size:17px;cursor:pointer;transition:background .18s,border-color .18s}
 .car-btn:hover{background:var(--ink-3);border-color:var(--mute)}
@@ -162,7 +163,7 @@ section.blk{padding-block:56px}
 .slide a:hover .sig{color:var(--paper)}
 .slide .art{max-height:440px;display:grid;place-items:center;background:var(--ink)}
 .slide .art img{width:100%;height:auto;max-height:440px;object-fit:contain}
-.sig{display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 16px 13px;font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft);transition:color .18s}
+.sig{display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 16px 13px;font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.32em;font-variant-numeric:tabular-nums;text-transform:uppercase;color:var(--soft);transition:color .18s}
 .sig::before,.sig::after{content:"";width:22px;height:1px;background:var(--red)}
 .slide .empty{aspect-ratio:4/5;display:grid;place-items:center;text-align:center;padding:20px;color:var(--mute);font-size:14.5px}
 
@@ -210,18 +211,6 @@ section.blk{padding-block:56px}
 .menu-note{margin-top:18px;color:#BFA488;font-size:14.5px}
 .menu-note a{color:var(--yellow)}
 
-.piso-news{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:12px 28px;align-items:start;padding-top:24px;border-top:1px solid var(--wood-3)}
-.piso-news h3{font-family:var(--serif);font-weight:700;font-size:24px;letter-spacing:0;padding-top:4px}
-.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.tab{min-height:36px;padding:0 15px;border-radius:var(--pill);border:1px solid var(--wood-3);background:transparent;color:#E2D5C5;font-family:var(--body);font-weight:500;font-size:14px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
-.tab:hover{border-color:var(--yellow)}
-.tab[aria-selected="true"]{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
-.panel ul{list-style:none;margin:0;padding:0;display:grid}
-.panel li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--wood-3)}
-.panel li:last-child{border-bottom:0}
-.panel li span:last-child{color:var(--yellow);white-space:nowrap}
-.pending{color:#C9B49C;font-size:15px}
-.pending a{color:var(--yellow)}
 
 /* Final: funcionamento + endereço com foto em degradê até o rodapé */
 .finale{position:relative;isolation:isolate;overflow:hidden;padding-block:84px 56px}
@@ -236,15 +225,21 @@ section.blk{padding-block:56px}
 .hours-big span{display:block;margin-top:6px;font-size:18px;color:var(--soft)}
 .box .note{color:var(--mute);font-size:14.5px}
 .box .note a{color:var(--yellow)}
-.addr{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.8vw,34px);letter-spacing:-.02em;line-height:1.1}
-.addr small{display:block;font-family:var(--body);font-size:15.5px;color:var(--soft);margin-top:6px;letter-spacing:0}
-.facts{display:grid}
-.fact{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line);align-items:baseline;font-size:15px}
-.fact .k{color:var(--mute);font-size:14px}
-.fact .v{min-width:0}
+.addr{font-style:normal;display:grid;gap:4px}
+.addr-street{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.8vw,34px);letter-spacing:-.02em;line-height:1.1}
+.addr-line{font-size:16px;color:var(--soft)}
+.contact{display:grid}
+.contact-row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.contact-row .k{color:var(--mute);font-size:14px}
+.contact-v{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-width:0}
+.tel-num{font-family:var(--display);font-size:20px;font-weight:500;letter-spacing:.01em;text-decoration:none;color:var(--paper);padding-block:6px;font-variant-numeric:tabular-nums}
+.tel-num:hover{color:var(--red)}
+.contact-txt{font-size:15px;color:var(--soft)}
+.btn-sm{min-height:40px;padding:0 16px;font-size:14px}
+@media (max-width:380px){.contact-row{grid-template-columns:1fr;gap:4px}}
 .tel{color:var(--paper);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;padding-block:4px;display:inline-block}
 .tel:hover{text-decoration-color:var(--red)}
-.copy{min-height:32px;margin-left:8px;background:none;border:1px solid var(--line);color:var(--mute);font-family:var(--body);font-size:12.5px;padding:3px 10px;border-radius:var(--pill);cursor:pointer}
+.copy{min-height:36px;background:none;border:1px solid var(--line);color:var(--mute);font-family:var(--body);font-size:12.5px;padding:3px 10px;border-radius:var(--pill);cursor:pointer}
 .copy:hover{color:var(--paper);border-color:var(--paper)}
 
 /* Rodapé */
@@ -252,6 +247,7 @@ footer{background:var(--ink);padding-block:0 110px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-block:32px;border-top:1px solid var(--line)}
 .foot img{height:40px;width:auto}
 .foot p{color:var(--mute);font-size:14.5px;margin-top:14px;max-width:30ch}
+.foot-addr{font-style:normal;color:var(--soft);font-size:14.5px;margin-top:10px;line-height:1.6}
 .foot .foot-t{font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--mute);margin-bottom:12px;letter-spacing:0}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:2px;font-size:15px}
 .foot li a,.foot li{display:inline-block;padding-block:6px}
@@ -288,6 +284,7 @@ footer{background:var(--ink);padding-block:0 110px}
 .lb-count{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font-size:14px;color:var(--soft)}
 @media (max-width:760px){.lb-prev,.lb-next{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:none}.lb-count{bottom:calc(24px + env(safe-area-inset-bottom,0px))}}
 .gal .ph{cursor:zoom-in}
+.gal .ph:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
 .rv{transition:opacity .5s ease,transform .5s ease}
 .js .rv.pre{opacity:.001;transform:translateY(16px)}
 
@@ -311,8 +308,7 @@ footer{background:var(--ink);padding-block:0 110px}
   .people-track .ph{width:42vw}
   .items{grid-template-columns:repeat(2,1fr);gap:10px}
   .menu-head{flex-direction:column;align-items:flex-start}
-  .piso-news{grid-template-columns:1fr}
-  .visit{grid-template-columns:1fr}
+    .visit{grid-template-columns:1fr}
   section.blk{padding-block:44px}
   .finale{padding-block:60px 44px}
 }
@@ -363,7 +359,7 @@ footer{background:var(--ink);padding-block:0 110px}
         </div>
         <div class="hero-info">
           <div class="when"><strong>Sexta e sábado</strong><span>A partir das 23h</span></div>
-          <div class="when muted"><strong>Conselheiro Aguiar, 2217</strong><span>Boa Viagem</span></div>
+          <div class="when muted"><strong>Av. Conselheiro Aguiar, 2217</strong><span>Boa Viagem, Recife</span></div>
         </div>
       </div>
     </div>
@@ -377,6 +373,7 @@ footer{background:var(--ink);padding-block:0 110px}
           <p class="eyebrow">Lux Nightlife Hub</p>
           <h2 id="ag-t">Agenda da semana</h2>
           <p>Toque na arte para falar com a Lux no WhatsApp sobre a festa.</p>
+          <p class="agenda-hours">Boate aberta sexta e sábado, a partir das 23h.</p>
           <div class="car-ctrl" aria-label="Controles da agenda">
             <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
             <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
@@ -474,13 +471,6 @@ footer{background:var(--ink);padding-block:0 110px}
         <p class="menu-note" id="menu-note"></p>
       </div>
 
-      <div class="piso-news">
-        <h3>Novidades</h3>
-        <div>
-          <div class="tabs" role="tablist" aria-label="Novidades do Piso Boteco" id="piso-tabs"></div>
-          <div class="panel" role="tabpanel" id="piso-panel" tabindex="0"></div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -495,18 +485,31 @@ footer{background:var(--ink);padding-block:0 110px}
         <div class="box">
           <h3>Funcionamento da boate</h3>
           <div class="hours-big"><strong>Sexta e sábado</strong><span>A partir das 23h</span></div>
-          <p class="note">O horário de cada festa vem na arte do evento. O Piso Boteco funciona à parte, <a href="#piso-boteco">veja no perfil do bar</a>.</p>
+          <p class="note">O horário de cada festa vem na arte do evento. O Piso Boteco tem funcionamento próprio: confira no <a data-ig href="#" target="_blank" rel="noopener noreferrer">@pisoboteco</a>.</p>
         </div>
         <div class="box">
           <h3>Como chegar</h3>
-          <p class="addr">Av. Conselheiro Aguiar, 2217<small>Boa Viagem, Recife – PE · CEP 51111-011</small></p>
+          <address class="addr">
+            <span class="addr-street">Av. Conselheiro Aguiar,&nbsp;2217</span>
+            <span class="addr-line">Boa Viagem, Recife – PE</span>
+            <span class="addr-line">CEP 51111-011</span>
+          </address>
           <div class="ctas" style="margin-top:0">
             <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Lux+Nightlife+Hub+Av.+Conselheiro+Aguiar+2217+Boa+Viagem+Recife" target="_blank" rel="noopener noreferrer">Abrir rota no mapa <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></span></a>
           </div>
-          <div class="facts">
-            <div class="fact"><span class="k">Telefone</span><span class="v"><a id="tel" class="tel" href="tel:+5581988269712">(81) 98826-9712</a><button class="copy" type="button" data-copy="tel">Copiar</button></span></div>
-            <div class="fact"><span class="k">WhatsApp</span><span class="v"><a class="tel" id="wa-link" href="https://wa.me/5581988269712" target="_blank" rel="noopener noreferrer">Falar com a Lux no WhatsApp</a></span></div>
-            <div class="fact"><span class="k">Ingressos</span><span class="v">Pelo link oficial de cada festa.</span></div>
+          <div class="contact">
+            <div class="contact-row">
+              <span class="k">Telefone</span>
+              <div class="contact-v"><a id="tel" class="tel-num" href="tel:+5581988269712">(81) 98826-9712</a><button class="copy" type="button" data-copy="tel" aria-label="Copiar telefone">Copiar</button></div>
+            </div>
+            <div class="contact-row">
+              <span class="k">WhatsApp</span>
+              <div class="contact-v"><a class="btn btn-ghost btn-sm" id="wa-link" href="https://wa.me/5581988269712" target="_blank" rel="noopener noreferrer">Falar com a Lux <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></span></a></div>
+            </div>
+            <div class="contact-row">
+              <span class="k">Ingressos</span>
+              <div class="contact-v"><span class="contact-txt">Pelo link oficial de cada festa</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -519,7 +522,8 @@ footer{background:var(--ink);padding-block:0 110px}
     <div class="foot">
       <div>
         <img src="img/logo.png" alt="lūx .nightlife hub" width="635" height="404" loading="lazy">
-        <p>Boate no primeiro andar, Piso Boteco no térreo. Av. Conselheiro Aguiar, 2217, Boa Viagem.</p>
+        <p>Boate no primeiro andar, Piso Boteco no térreo.</p>
+        <address class="foot-addr">Av. Conselheiro Aguiar, 2217<br>Boa Viagem, Recife – PE<br>CEP 51111-011</address>
       </div>
       <div>
         <p class="foot-t">Lux</p>
@@ -531,7 +535,7 @@ footer{background:var(--ink);padding-block:0 110px}
       </div>
       <div>
         <p class="foot-t">Funcionamento</p>
-        <ul><li>Boate: sexta e sábado</li><li>A partir das 23h</li></ul>
+        <ul><li>Boate: sexta e sábado,<br>a partir das 23h</li><li><a href="tel:+5581988269712">(81) 98826-9712</a></li></ul>
       </div>
     </div>
     <div class="credits">
@@ -622,8 +626,6 @@ const PISO = {
     { categoria:'Bebidas', foto:'piso-coquetel', nome:'Coquetel',               preco:'' },
     { categoria:'Bebidas', foto:'piso-gins',     nome:'Gins na taça do Piso',   preco:'' }
   ],
-  promocoes:[], eventos:[],   // itens: { nome:'', descricao:'', preco:'' }
-  reservas:''                 // ex.: 'Reservas pelo direct do @pisoboteco'
 };
 
 /* CRÉDITO DO SITE */
@@ -644,7 +646,7 @@ if(ativos.length){
   slidesEl.innerHTML=ativos.map((e,i)=>{
     const msg=`Olá! Quero informações sobre a ${e.nome}, ${e.dia==='Sexta'?'sexta-feira':'sábado'} ${ddmm(e.data)}, na LUX.`;
     const href=e.link||(CONTATO.whatsapp?`https://wa.me/${CONTATO.whatsapp}?text=${encodeURIComponent(msg)}`:'');
-    const inner=`<div class="art"><img src="${esc(e.arte)}" alt="Arte oficial da ${esc(e.nome)}, ${esc(e.dia.toLowerCase())} ${esc(ddmm(e.data))}${e.lineup?'. Line-up: '+esc(e.lineup):''}"${i?' loading="lazy"':''}></div><div class="sig">${esc(e.dia)}</div>`;
+    const inner=`<div class="art"><img src="${esc(e.arte)}" alt="Arte oficial da ${esc(e.nome)}, ${esc(e.dia.toLowerCase())} ${esc(ddmm(e.data))}${e.lineup?'. Line-up: '+esc(e.lineup):''}"${i?' loading="lazy"':''}></div><div class="sig">${esc(e.dia)} · ${esc(ddmm(e.data))}</div>`;
     const label=e.link?`Ingressos da ${esc(e.nome)}`:`Falar no WhatsApp sobre a ${esc(e.nome)}`;
     return `<div class="slide${i?'':' on'}" role="group" aria-roledescription="slide" aria-label="${i+1} de ${ativos.length}: ${esc(e.dia)}" ${i?'aria-hidden="true"':''}>${href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${inner}</a>`:`<div class="frame">${inner}</div>`}</div>`;
   }).join('');
@@ -682,7 +684,7 @@ document.getElementById('ano').textContent=new Date().getFullYear();
 /* ---------- Piso: cardápio com filtros ---------- */
 const itemsEl=document.getElementById('items');
 itemsEl.innerHTML=PISO.cardapio.map(i=>`<article class="item" data-cat="${esc(i.categoria)}">${i.foto?`<div class="ph zoom"><img data-foto="${esc(i.foto)}" alt="${esc(i.nome)} no Piso Boteco" loading="lazy"></div>`:''}<div class="t"><strong>${esc(i.nome)}</strong>${i.preco?`<em>${esc(i.preco)}</em>`:''}</div><small>${i.categoria==='Comidas'?'Comida':'Bebida'}</small></article>`).join('');
-document.getElementById('menu-note').innerHTML=`Cardápio completo e valores no${PISO.instagram?` <a href="${esc(PISO.instagram)}" target="_blank" rel="noopener noreferrer">@pisoboteco</a>`:' perfil do bar'}.`;
+document.getElementById('menu-note').innerHTML=`Cardápio completo, valores, promoções e reservas no${PISO.instagram?` <a href="${esc(PISO.instagram)}" target="_blank" rel="noopener noreferrer">@pisoboteco</a>`:' perfil do bar'}.`;
 const filtrar=f=>{
   document.querySelectorAll('.filter').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
   const its=[...itemsEl.children];
@@ -691,20 +693,6 @@ const filtrar=f=>{
 };
 document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.filter');if(b)filtrar(b.dataset.f);});
 [...itemsEl.children].forEach(el=>{el.hidden=el.dataset.cat!=='Comidas';});
-
-/* ---------- Piso: novidades ---------- */
-const ABAS=[['promocoes','Promoções'],['eventos','Eventos do bar'],['reservas','Reservas']];
-const tabs=document.getElementById('piso-tabs'),panel=document.getElementById('piso-panel');
-const igLink=PISO.instagram?` Acompanhe no <a href="${esc(PISO.instagram)}" target="_blank" rel="noopener noreferrer">@pisoboteco</a>.`:'';
-const renderAba=k=>{
-  const v=PISO[k];
-  if(k==='reservas')panel.innerHTML=v?`<p>${esc(v)}</p>`:`<p class="pending">Reservas e aniversários são combinados direto com o bar.${igLink}</p>`;
-  else panel.innerHTML=v&&v.length?`<ul>${v.map(i=>`<li><span>${esc(i.nome)}${i.descricao?` · ${esc(i.descricao)}`:''}</span><span>${esc(i.preco||'')}</span></li>`).join('')}</ul>`:`<p class="pending">Ainda não publicado aqui.${igLink}</p>`;
-  tabs.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.k===k));
-};
-tabs.innerHTML=ABAS.map(([k,n])=>`<button class="tab" role="tab" type="button" data-k="${k}" aria-controls="piso-panel">${n}</button>`).join('');
-tabs.addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)renderAba(t.dataset.k);});
-renderAba('promocoes');
 
 /* ---------- Fotos: registro, sem repetição e sem misturar áreas ---------- */
 const usadas=new Set();
@@ -720,7 +708,7 @@ document.querySelectorAll('img[data-foto]').forEach(img=>{
 /* ---------- Carrosséis em movimento contínuo (galeria da Lux e pessoas no Piso) ----------
    As cópias são só visuais (aria-hidden), criadas depois do registro de fotos, para o loop não ter emenda. */
 function loopContinuo(track,btnPrev,btnNext,vel){
-  [...track.children].forEach(el=>{const c=el.cloneNode(true);c.setAttribute('aria-hidden','true');c.querySelectorAll('img').forEach(i=>{i.removeAttribute('data-foto');i.alt='';});track.appendChild(c);});
+  [...track.children].forEach(el=>{const c=el.cloneNode(true);c.setAttribute('aria-hidden','true');c.removeAttribute('role');c.removeAttribute('aria-label');c.tabIndex=-1;c.querySelectorAll('img').forEach(i=>{i.removeAttribute('data-foto');i.alt='';});track.appendChild(c);});
   const meio=()=>track.scrollWidth/2;
   let pos=0,pausa=false,hold=0,last=0,visivel=true;
   if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>visivel=e.isIntersecting)).observe(track);
@@ -744,11 +732,14 @@ function loopContinuo(track,btnPrev,btnNext,vel){
 }
 /* ---------- Galeria: foto ampliada ---------- */
 const galFotos=[...document.querySelectorAll('#gal .ph img')].map(i=>({src:i.dataset.full||i.src,alt:i.alt}));
+document.querySelectorAll('#gal .ph').forEach((ph,i)=>{ph.tabIndex=0;ph.setAttribute('role','button');ph.setAttribute('aria-label','Ampliar foto: '+galFotos[i].alt);});
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbCount=document.getElementById('lb-count');
 let lbI=0;
 const lbShow=i=>{lbI=(i+galFotos.length)%galFotos.length;lbImg.src=galFotos[lbI].src;lbImg.alt=galFotos[lbI].alt;lbCount.textContent=`${lbI+1} de ${galFotos.length}`;};
 if(lb.showModal){
-  document.getElementById('gal').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;const all=[...document.querySelectorAll('#gal .ph')];lbShow(all.indexOf(ph)%galFotos.length);lb.showModal();});
+  const abrir=ph=>{const all=[...document.querySelectorAll('#gal .ph')];lbShow(all.indexOf(ph)%galFotos.length);lb.showModal();};
+  document.getElementById('gal').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(ph)abrir(ph);});
+  document.getElementById('gal').addEventListener('keydown',e=>{const ph=e.target.closest('.ph');if(ph&&(e.key==='Enter'||e.key===' ')){e.preventDefault();abrir(ph);}});
   document.getElementById('lb-close').onclick=()=>lb.close();
   document.getElementById('lb-prev').onclick=()=>lbShow(lbI-1);
   document.getElementById('lb-next').onclick=()=>lbShow(lbI+1);
