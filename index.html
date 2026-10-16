@@ -34,18 +34,10 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
-/* Fundo vivo: preto profundo ↔ grafite, com um verde muito discreto do asterisco da Lux */
-body::after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;
-  background:
-    radial-gradient(38% 32% at 22% 28%,rgba(58,54,56,.55),transparent 70%),
-    radial-gradient(34% 30% at 78% 62%,rgba(44,42,46,.6),transparent 72%),
-    radial-gradient(26% 24% at 60% 18%,rgba(40,120,70,.10),transparent 70%),
-    radial-gradient(30% 28% at 30% 82%,rgba(30,28,30,.7),transparent 70%);
-  animation:drift 36s ease-in-out infinite alternate;will-change:transform}
-@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6%,-4%,0) scale(1.08)}100%{transform:translate3d(-5%,5%,0) scale(1.02)}}
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:var(--r-sm)}
@@ -235,7 +227,7 @@ section.blk{padding-block:56px}
 .copy:hover{color:var(--paper);border-color:var(--paper)}
 
 /* Rodapé */
-footer{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 60%,transparent));padding-block:0 110px}
+footer{background:var(--ink);padding-block:0 110px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-block:32px;border-top:1px solid var(--line)}
 .foot img{height:40px;width:auto}
 .foot p{color:var(--mute);font-size:14.5px;margin-top:14px;max-width:30ch}
@@ -292,7 +284,6 @@ footer{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink)
 @media (max-width:420px){.foot{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  body::after{animation:none!important}
   html{scroll-behavior:auto}
   .js .rv.pre{opacity:1;transform:none}
 }
