@@ -37,6 +37,15 @@
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+/* Fundo vivo: preto profundo ↔ grafite, com um verde muito discreto do asterisco da Lux */
+body::after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 22% 28%,rgba(58,54,56,.55),transparent 70%),
+    radial-gradient(34% 30% at 78% 62%,rgba(44,42,46,.6),transparent 72%),
+    radial-gradient(26% 24% at 60% 18%,rgba(40,120,70,.10),transparent 70%),
+    radial-gradient(30% 28% at 30% 82%,rgba(30,28,30,.7),transparent 70%);
+  animation:drift 36s ease-in-out infinite alternate;will-change:transform}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6%,-4%,0) scale(1.08)}100%{transform:translate3d(-5%,5%,0) scale(1.02)}}
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:var(--r-sm)}
@@ -91,6 +100,10 @@ p{margin:0}
 .btn-yellow{background:var(--yellow);color:var(--yellow-ink)}
 .btn-yellow:hover{background:#FFD95C}
 .btn svg{width:17px;height:17px}
+.ico{width:18px;height:18px;display:block}
+.arr{display:inline-flex}
+.arr .ico{width:16px;height:16px}
+.car-btn{display:inline-grid;place-items:center}
 
 /* Hero com foto de fundo em degradê */
 .hero{position:relative;isolation:isolate;overflow:hidden;margin-top:-70px;padding-top:70px}
@@ -144,8 +157,9 @@ section.blk{padding-block:56px}
 
 /* Galeria */
 .gal-ctrl{display:flex;gap:8px}
-.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-color:var(--line) transparent;overscroll-behavior-x:contain}
-.gal .ph{flex:0 0 auto;width:clamp(180px,19vw,230px);aspect-ratio:3/4;scroll-snap-align:start}
+.gal{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.gal::-webkit-scrollbar{display:none}
+.gal .ph{flex:0 0 auto;width:clamp(180px,19vw,230px);aspect-ratio:3/4}
 
 /* ===== Piso Boteco ===== */
 .piso{background:var(--wood)}
@@ -163,9 +177,9 @@ section.blk{padding-block:56px}
 .people-ctrl{display:flex;gap:8px}
 .people-ctrl .car-btn{border-color:var(--wood-3)}
 .people-ctrl .car-btn:hover{background:var(--wood-2);border-color:var(--yellow)}
-.people-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;scrollbar-width:none;overscroll-behavior-x:contain}
+.people-track{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .people-track::-webkit-scrollbar{display:none}
-.people-track .ph{flex:0 0 auto;width:clamp(170px,18vw,215px);aspect-ratio:3/4;scroll-snap-align:start;background:var(--wood-2)}
+.people-track .ph{flex:0 0 auto;width:clamp(170px,18vw,215px);aspect-ratio:3/4;background:var(--wood-2)}
 
 .piso-menu{margin-top:44px}
 .menu-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:18px}
@@ -221,7 +235,7 @@ section.blk{padding-block:56px}
 .copy:hover{color:var(--paper);border-color:var(--paper)}
 
 /* Rodapé */
-footer{background:var(--ink);padding-block:0 110px}
+footer{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 60%,transparent));padding-block:0 110px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-block:32px;border-top:1px solid var(--line)}
 .foot img{height:40px;width:auto}
 .foot p{color:var(--mute);font-size:14.5px;margin-top:14px;max-width:30ch}
@@ -278,6 +292,7 @@ footer{background:var(--ink);padding-block:0 110px}
 @media (max-width:420px){.foot{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
+  body::after{animation:none!important}
   html{scroll-behavior:auto}
   .js .rv.pre{opacity:1;transform:none}
 }
@@ -287,6 +302,9 @@ footer{background:var(--ink);padding-block:0 110px}
 
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16L16 8M9 8h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></symbol>
 </svg>
 
@@ -299,10 +317,10 @@ footer{background:var(--ink);padding-block:0 110px}
 <div class="scrim closed" id="scrim"></div>
 <nav class="menu closed" id="menu" aria-label="Menu principal">
   <a class="week" href="#agenda"><small>Agenda da semana</small><strong id="menu-week">Sexta e sábado</strong></a>
-  <a href="#galeria">Galeria <span class="arr">→</span></a>
-  <a href="#visite">Funcionamento e endereço <span class="arr">→</span></a>
+  <a href="#galeria">Galeria <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span></a>
+  <a href="#visite">Funcionamento e endereço <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span></a>
   <hr>
-  <a class="piso-link" href="#piso-boteco">Piso Boteco <span class="arr">→</span></a>
+  <a class="piso-link" href="#piso-boteco">Piso Boteco <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span></a>
 </nav>
 
 <main id="inicio">
@@ -314,7 +332,7 @@ footer{background:var(--ink);padding-block:0 110px}
         <h1 id="hero-t">A noite tem <span class="r">endereço.</span></h1>
         <p class="hero-lede">Pista, DJ e festa temática no primeiro andar da Conselheiro Aguiar.</p>
         <div class="ctas">
-          <a class="btn btn-red" href="#agenda">Ver a agenda <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn-red" href="#agenda">Ver a agenda <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span></a>
           <a class="btn btn-ghost" href="#visite">Como chegar</a>
         </div>
         <div class="hero-info">
@@ -334,8 +352,8 @@ footer{background:var(--ink);padding-block:0 110px}
           <h2 id="ag-t">Agenda da semana</h2>
           <p>Toque na arte para falar com a Lux no WhatsApp sobre a festa.</p>
           <div class="car-ctrl" aria-label="Controles da agenda">
-            <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior">←</button>
-            <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte">→</button>
+            <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
             <div class="dots" data-dots></div>
           </div>
           <p class="past-line">Já passaram por aqui: <strong>BaiLux</strong>, a festa dos anos 2000, e <strong>Alterego Night</strong>.</p>
@@ -344,9 +362,9 @@ footer{background:var(--ink);padding-block:0 110px}
           <div class="slides" id="slides"></div>
         </div>
         <div class="car-ctrl car-mobile" style="display:none" aria-label="Controles da agenda">
-          <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior">←</button>
+          <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
           <div class="dots" data-dots></div>
-          <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte">→</button>
+          <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
         </div>
       </div>
     </div>
@@ -358,8 +376,8 @@ footer{background:var(--ink);padding-block:0 110px}
       <div class="sec-head">
         <div><p class="eyebrow">Galeria</p><h2 id="gal-t">Noites na Lux</h2></div>
         <div class="gal-ctrl">
-          <button class="car-btn" type="button" id="gal-prev" aria-label="Fotos anteriores">←</button>
-          <button class="car-btn" type="button" id="gal-next" aria-label="Próximas fotos">→</button>
+          <button class="car-btn" type="button" id="gal-prev" aria-label="Fotos anteriores"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <button class="car-btn" type="button" id="gal-next" aria-label="Próximas fotos"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
         </div>
       </div>
       <div class="gal" id="gal" tabindex="0" aria-label="Galeria de fotos da Lux, role para os lados">
@@ -402,8 +420,8 @@ footer{background:var(--ink);padding-block:0 110px}
         <div class="people-head">
           <h3 id="people-t">Quem passa pelo Piso</h3>
           <div class="people-ctrl">
-            <button class="car-btn" type="button" id="pp-prev" aria-label="Fotos anteriores">←</button>
-            <button class="car-btn" type="button" id="pp-next" aria-label="Próximas fotos">→</button>
+            <button class="car-btn" type="button" id="pp-prev" aria-label="Fotos anteriores"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <button class="car-btn" type="button" id="pp-next" aria-label="Próximas fotos"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
           </div>
         </div>
         <div class="people-track" id="people" tabindex="0" aria-roledescription="carrossel" aria-label="Fotos de clientes no Piso Boteco">
@@ -421,6 +439,7 @@ footer{background:var(--ink);padding-block:0 110px}
         <div class="menu-head">
           <h3>Comidas e bebidas</h3>
           <div class="filters" role="group" aria-label="Filtrar cardápio" id="filters">
+            <button class="filter" type="button" data-f="tudo" aria-pressed="false">Tudo</button>
             <button class="filter" type="button" data-f="Comidas" aria-pressed="true">Comidas</button>
             <button class="filter" type="button" data-f="Bebidas" aria-pressed="false">Bebidas</button>
           </div>
@@ -456,7 +475,7 @@ footer{background:var(--ink);padding-block:0 110px}
           <h3>Como chegar</h3>
           <p class="addr">Av. Conselheiro Aguiar, 2217<small>Boa Viagem, Recife – PE · CEP 51111-011</small></p>
           <div class="ctas" style="margin-top:0">
-            <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Lux+Nightlife+Hub+Av.+Conselheiro+Aguiar+2217+Boa+Viagem+Recife" target="_blank" rel="noopener noreferrer">Abrir rota no mapa <span class="arr" aria-hidden="true">↗</span></a>
+            <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Lux+Nightlife+Hub+Av.+Conselheiro+Aguiar+2217+Boa+Viagem+Recife" target="_blank" rel="noopener noreferrer">Abrir rota no mapa <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></span></a>
           </div>
           <div class="facts">
             <div class="fact"><span class="k">Telefone</span><span class="v"><span id="tel">(81) 98826-9712</span><button class="copy" type="button" data-copy="tel">Copiar</button></span></div>
@@ -633,7 +652,7 @@ const filtrar=f=>{
   document.querySelectorAll('.filter').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
   const its=[...itemsEl.children];
   its.forEach(el=>el.classList.add('fade'));
-  setTimeout(()=>{its.forEach(el=>{el.hidden=!(f==='tudo'||el.dataset.cat===f);});requestAnimationFrame(()=>its.forEach(el=>el.classList.remove('fade')));},reduz?0:180);
+  its.forEach(el=>{el.hidden=!(f==='tudo'||el.dataset.cat===f);});requestAnimationFrame(()=>requestAnimationFrame(()=>its.forEach(el=>el.classList.remove('fade'))));
 };
 document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.filter');if(b)filtrar(b.dataset.f);});
 [...itemsEl.children].forEach(el=>{el.hidden=el.dataset.cat!=='Comidas';});
@@ -652,24 +671,6 @@ tabs.innerHTML=ABAS.map(([k,n])=>`<button class="tab" role="tab" type="button" d
 tabs.addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)renderAba(t.dataset.k);});
 renderAba('promocoes');
 
-/* ---------- Piso: carrossel de pessoas ---------- */
-const pp=document.getElementById('people');
-const ppStep=()=>{const c=pp.querySelector('.ph');return c?c.getBoundingClientRect().width+10:220;};
-const ppGo=d=>{const max=pp.scrollWidth-pp.clientWidth-4;
-  if(d>0&&pp.scrollLeft>=max)pp.scrollTo({left:0,behavior:reduz?'auto':'smooth'});
-  else if(d<0&&pp.scrollLeft<=4)pp.scrollTo({left:pp.scrollWidth,behavior:reduz?'auto':'smooth'});
-  else pp.scrollBy({left:d*ppStep(),behavior:reduz?'auto':'smooth'});};
-let ppT=null,ppPause=false;
-const ppPlay=()=>{clearInterval(ppT);if(!reduz&&!ppPause)ppT=setInterval(()=>ppGo(1),3500);};
-document.getElementById('pp-prev').onclick=()=>{ppGo(-1);ppPlay();};
-document.getElementById('pp-next').onclick=()=>{ppGo(1);ppPlay();};
-const ppP=v=>{ppPause=v;v?clearInterval(ppT):ppPlay();};
-pp.addEventListener('mouseenter',()=>ppP(true));pp.addEventListener('mouseleave',()=>ppP(false));
-pp.addEventListener('focusin',()=>ppP(true));pp.addEventListener('focusout',()=>ppP(false));
-pp.addEventListener('touchstart',()=>ppP(true),{passive:true});pp.addEventListener('touchend',()=>setTimeout(()=>ppP(false),4000));
-pp.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){ppGo(1);e.preventDefault();}if(e.key==='ArrowLeft'){ppGo(-1);e.preventDefault();}});
-if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?ppPlay():clearInterval(ppT))).observe(pp);}else ppPlay();
-
 /* ---------- Fotos: registro, sem repetição e sem misturar áreas ---------- */
 const usadas=new Set();
 document.querySelectorAll('img[data-foto]').forEach(img=>{
@@ -680,6 +681,34 @@ document.querySelectorAll('img[data-foto]').forEach(img=>{
   if(f.area!==area){console.warn(`Foto "${k}" (${f.area}) bloqueada na área ${area}`);box?.remove();return;}
   usadas.add(k);img.src=f.src;if(f.pos)img.style.objectPosition=f.pos;
 });
+
+/* ---------- Carrosséis em movimento contínuo (galeria da Lux e pessoas no Piso) ----------
+   As cópias são só visuais (aria-hidden), criadas depois do registro de fotos, para o loop não ter emenda. */
+function loopContinuo(track,btnPrev,btnNext,vel){
+  [...track.children].forEach(el=>{const c=el.cloneNode(true);c.setAttribute('aria-hidden','true');c.querySelectorAll('img').forEach(i=>{i.removeAttribute('data-foto');i.alt='';});track.appendChild(c);});
+  const meio=()=>track.scrollWidth/2;
+  let pos=0,pausa=false,hold=0,last=0,visivel=true;
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>visivel=e.isIntersecting)).observe(track);
+  const tick=t=>{
+    const dt=last?Math.min((t-last)/1000,.05):0;last=t;
+    if(!pausa&&!reduz&&t>hold&&visivel){pos+=vel*dt;if(pos>=meio())pos-=meio();track.scrollLeft=pos;}
+    else pos=track.scrollLeft;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  const card=()=>{const c=track.querySelector('.ph');return c?c.getBoundingClientRect().width+10:220;};
+  const ajusta=()=>{if(track.scrollLeft>=meio())track.scrollLeft-=meio();pos=track.scrollLeft;};
+  const passo=d=>{hold=performance.now()+900;let alvo=track.scrollLeft+d*card();if(alvo<0){track.scrollLeft+=meio();alvo+=meio();}
+    track.scrollTo({left:alvo,behavior:reduz?'auto':'smooth'});setTimeout(ajusta,800);};
+  btnPrev.onclick=()=>passo(-1);btnNext.onclick=()=>passo(1);
+  track.addEventListener('mouseenter',()=>pausa=true);track.addEventListener('mouseleave',()=>pausa=false);
+  track.addEventListener('focusin',()=>pausa=true);track.addEventListener('focusout',()=>pausa=false);
+  track.addEventListener('touchstart',()=>pausa=true,{passive:true});
+  track.addEventListener('touchend',()=>setTimeout(()=>{ajusta();pausa=false;},1500),{passive:true});
+  track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){passo(1);e.preventDefault();}if(e.key==='ArrowLeft'){passo(-1);e.preventDefault();}});
+}
+loopContinuo(document.getElementById('gal'),document.getElementById('gal-prev'),document.getElementById('gal-next'),30);
+loopContinuo(document.getElementById('people'),document.getElementById('pp-prev'),document.getElementById('pp-next'),26);
 
 /* ---------- Menu ---------- */
 const burger=document.getElementById('burger'),menu=document.getElementById('menu'),scrim=document.getElementById('scrim');
@@ -696,11 +725,6 @@ if('IntersectionObserver' in window){
   const fio=new IntersectionObserver(es=>{es.forEach(e=>vis.set(e.target,e.isIntersecting));fab.classList.toggle('hide',[...vis.values()].some(Boolean));},{threshold:0.05});
   [document.querySelector('footer'),document.querySelector('.hero')].forEach(el=>fio.observe(el));
 }else fab.classList.remove('hide');
-
-/* ---------- Galeria ---------- */
-const gal=document.getElementById('gal'),step=()=>Math.max(200,gal.clientWidth*.7);
-document.getElementById('gal-prev').onclick=()=>gal.scrollBy({left:-step(),behavior:'smooth'});
-document.getElementById('gal-next').onclick=()=>gal.scrollBy({left:step(),behavior:'smooth'});
 
 /* ---------- Copiar telefone ---------- */
 document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
