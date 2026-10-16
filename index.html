@@ -3,14 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lux Nightlife Hub</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>Lux Nightlife Hub | Boate em Boa Viagem, Recife</title>
 <meta name="description" content="Lux Nightlife Hub, boate em Boa Viagem, Recife (PE). Sexta e sábado a partir das 23h. No térreo, o Piso Boteco. Av. Conselheiro Aguiar, 2217.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600&family=Albert+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,500&display=swap">
+<meta name="theme-color" content="#0A0909">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="img/icon-512.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lux Nightlife Hub">
+<meta property="og:title" content="Lux Nightlife Hub | Boate em Boa Viagem, Recife">
+<meta property="og:description" content="Boate em Boa Viagem: sexta e sábado a partir das 23h. No térreo, o Piso Boteco. Av. Conselheiro Aguiar, 2217.">
+<meta property="og:url" content="https://lux-site-tawny.vercel.app/">
+<meta property="og:image" content="https://lux-site-tawny.vercel.app/img/og-lux.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="img/letreiro.webp" fetchpriority="high">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NightClub", "name": "Lux Nightlife Hub", "url": "https://lux-site-tawny.vercel.app/", "image": "https://lux-site-tawny.vercel.app/img/og-lux.jpg", "address": {"@type": "PostalAddress", "streetAddress": "Av. Conselheiro Aguiar, 2217", "addressLocality": "Recife", "addressRegion": "PE", "postalCode": "51111-011", "addressCountry": "BR"}}</script>
 <style>
-/* Layout: noturno leve — títulos geométricos finos (Red Hat Display 400–500), leitura em Albert Sans, vermelho do letreiro LŪX como acento; Piso Boteco em amarelo + serifa do letreiro PISO */
+/* Layout: noturno leve — uma família principal (Red Hat Display 400–500) para títulos e textos, vermelho do letreiro LŪX como acento; Piso Boteco em amarelo + serifa do letreiro PISO */
 :root{
   --ink:#0A0909;
   --ink-2:#131011;
@@ -19,14 +35,15 @@
   --paper:#F4F0E8;
   --soft:#CFC7BF;
   --mute:#958A84;
-  --red:#FF2E3F;
+  --red:#FF2E3F;        /* acento: linhas, pontos, destaque em texto */
+  --red-btn:#D91A2B;    /* botões com texto branco (contraste 5:1) */
   --yellow:#F6C431;
   --yellow-ink:#1C1406;
   --wood:#16100B;
   --wood-2:#20180F;
   --wood-3:#33261A;
   --display:"Red Hat Display",Helvetica,Arial,sans-serif;
-  --body:"Albert Sans",Helvetica,Arial,sans-serif;
+  --body:"Red Hat Display",Helvetica,Arial,sans-serif;
   --serif:"Playfair Display",Georgia,"Times New Roman",serif;
   --r-sm:10px; --r:16px; --r-lg:22px; --pill:999px;
   --gut:max(16px,env(safe-area-inset-left,0px));
@@ -70,8 +87,8 @@ p{margin:0}
 .menu a{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:var(--r-sm);text-decoration:none;font-family:var(--display);font-weight:500;font-size:16.5px;transition:background .15s}
 .menu a:hover{background:var(--ink-3)}
 .menu a .arr{color:var(--mute);font-weight:400}
-.menu .week{display:block;background:var(--red);color:#fff;margin-bottom:6px;padding:14px}
-.menu .week:hover{background:#FF4C5B}
+.menu .week{display:block;background:var(--red-btn);color:#fff;margin-bottom:6px;padding:14px}
+.menu .week:hover{background:#C21424}
 .menu .week small{display:block;font-family:var(--body);font-size:13px;font-weight:500;opacity:.85}
 .menu .week strong{display:block;margin-top:2px;font-weight:500;font-size:18px}
 .menu .piso-link{font-family:var(--serif);font-weight:700;font-size:18px}
@@ -85,8 +102,8 @@ p{margin:0}
 .btn:active{transform:scale(.98)}
 .btn .arr{transition:transform .18s}
 .btn:hover .arr{transform:translateX(3px)}
-.btn-red{background:var(--red);color:#fff}
-.btn-red:hover{background:#FF4C5B}
+.btn-red{background:var(--red-btn);color:#fff}
+.btn-red:hover{background:#C21424}
 .btn-ghost{border-color:color-mix(in srgb,var(--paper) 28%,transparent);color:var(--paper)}
 .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .btn-yellow{background:var(--yellow);color:var(--yellow-ink)}
@@ -104,7 +121,7 @@ p{margin:0}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
   linear-gradient(90deg,var(--ink) 30%,color-mix(in srgb,var(--ink) 72%,transparent) 50%,color-mix(in srgb,var(--ink) 15%,transparent) 80%,color-mix(in srgb,var(--ink) 45%,transparent) 100%),
   linear-gradient(180deg,color-mix(in srgb,var(--ink) 60%,transparent) 0%,transparent 22%,transparent 62%,var(--ink) 100%)}
-.hero .wrap{padding-block:56px 56px;min-height:min(500px,72vh);display:flex;flex-direction:column;justify-content:center}
+.hero .wrap{padding-block:56px 56px;min-height:min(500px,72vh);min-height:min(500px,72svh);display:flex;flex-direction:column;justify-content:center}
 .hero-copy{max-width:560px;min-width:0}
 .hero h1{font-size:clamp(44px,6.4vw,84px);font-weight:400;letter-spacing:-.035em;line-height:.98;margin-top:16px}
 .hero h1 .r{color:var(--red);font-weight:500}
@@ -130,8 +147,10 @@ section.blk{padding-block:56px}
 .car-btn{width:44px;height:44px;border-radius:var(--pill);border:1px solid var(--line);background:transparent;color:var(--paper);font-size:17px;cursor:pointer;transition:background .18s,border-color .18s}
 .car-btn:hover{background:var(--ink-3);border-color:var(--mute)}
 .dots{display:flex;gap:6px;margin-left:6px}
-.dots button{width:8px;height:8px;border-radius:var(--pill);border:0;background:var(--line);padding:0;cursor:pointer;transition:width .25s,background .25s}
-.dots button[aria-current="true"]{width:22px;background:var(--red)}
+.dots{gap:0!important}
+.dots button{width:28px;height:32px;border:0;background:transparent;padding:0;cursor:pointer;display:grid;place-items:center}
+.dots button::before{content:"";width:8px;height:8px;border-radius:var(--pill);background:var(--line);transition:width .25s,background .25s}
+.dots button[aria-current="true"]::before{width:22px;background:var(--red)}
 .past-line{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--mute)}
 .past-line strong{color:var(--soft);font-weight:500}
 
@@ -223,7 +242,9 @@ section.blk{padding-block:56px}
 .fact{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line);align-items:baseline;font-size:15px}
 .fact .k{color:var(--mute);font-size:14px}
 .fact .v{min-width:0}
-.copy{margin-left:8px;background:none;border:1px solid var(--line);color:var(--mute);font-family:var(--body);font-size:12.5px;padding:3px 10px;border-radius:var(--pill);cursor:pointer}
+.tel{color:var(--paper);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;padding-block:4px;display:inline-block}
+.tel:hover{text-decoration-color:var(--red)}
+.copy{min-height:32px;margin-left:8px;background:none;border:1px solid var(--line);color:var(--mute);font-family:var(--body);font-size:12.5px;padding:3px 10px;border-radius:var(--pill);cursor:pointer}
 .copy:hover{color:var(--paper);border-color:var(--paper)}
 
 /* Rodapé */
@@ -231,8 +252,9 @@ footer{background:var(--ink);padding-block:0 110px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-block:32px;border-top:1px solid var(--line)}
 .foot img{height:40px;width:auto}
 .foot p{color:var(--mute);font-size:14.5px;margin-top:14px;max-width:30ch}
-.foot h4{font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--mute);margin-bottom:12px;letter-spacing:0}
-.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.foot .foot-t{font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--mute);margin-bottom:12px;letter-spacing:0}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:2px;font-size:15px}
+.foot li a,.foot li{display:inline-block;padding-block:6px}
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--red)}
 .foot .piso-col a:hover{color:var(--yellow)}
@@ -246,13 +268,26 @@ footer{background:var(--ink);padding-block:0 110px}
 .fab-bar.hide{opacity:0;transform:translateX(-50%) translateY(20px);pointer-events:none}
 .fab{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:0 22px;border-radius:var(--pill);text-decoration:none;white-space:nowrap;transition:background .18s,transform .18s}
 .fab:active{transform:scale(.97)}
-.fab-agenda{background:var(--red);color:#fff;font-family:var(--display);font-weight:500;font-size:16px}
-.fab-agenda:hover{background:#FF4C5B}
+.fab-agenda{background:var(--red-btn);color:#fff;font-family:var(--display);font-weight:500;font-size:16px}
+.fab-agenda:hover{background:#C21424}
 .fab-piso{background:var(--yellow);color:var(--yellow-ink);font-family:var(--serif);font-weight:700;font-size:17px}
 .fab-piso:hover{background:#FFD95C}
 .fab-piso small{font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
 @media (max-width:380px){.fab{padding:0 16px}.fab-piso small{display:none}}
 
+.lb{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;color:var(--paper)}
+.lb::backdrop{background:rgba(5,4,4,.92)}
+.lb[open]{display:grid;place-items:center}
+.lb figure{margin:0;display:grid;place-items:center;width:100%;height:100%;padding:56px max(16px,env(safe-area-inset-left,0px)) 72px}
+.lb img{max-width:min(92vw,900px);max-height:78vh;max-height:78svh;width:auto;height:auto;border-radius:var(--r);object-fit:contain}
+.lb-btn{position:fixed;width:46px;height:46px;border-radius:var(--pill);border:1px solid var(--line);background:rgba(10,9,9,.7);color:var(--paper);display:grid;place-items:center;cursor:pointer}
+.lb-btn:hover{border-color:var(--paper)}
+.lb-close{top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
+.lb-prev{left:max(14px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
+.lb-next{right:max(14px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+.lb-count{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font-size:14px;color:var(--soft)}
+@media (max-width:760px){.lb-prev,.lb-next{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:none}.lb-count{bottom:calc(24px + env(safe-area-inset-bottom,0px))}}
+.gal .ph{cursor:zoom-in}
 .rv{transition:opacity .5s ease,transform .5s ease}
 .js .rv.pre{opacity:.001;transform:translateY(16px)}
 
@@ -397,7 +432,7 @@ footer{background:var(--ink);padding-block:0 110px}
       <div class="piso-intro">
         <div>
           <p class="eyebrow">No térreo da Lux</p>
-          <h2 id="piso-t" class="piso-name">PISO<small><span>Bar</span><span>Boteco</span></small></h2>
+          <h2 id="piso-t" class="piso-name" aria-label="Piso Bar Boteco">PISO<small><span>Bar</span><span>Boteco</span></small></h2>
           <p class="lede">O térreo agora é o Piso. Mesa de madeira, drink gelado, gin bem servido e lugar pra cantar parabéns. Dá pra começar a noite aqui e subir depois, ou ficar por aqui mesmo.</p>
           <div class="ctas">
             <a class="btn btn-yellow" data-ig href="#" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg>@pisoboteco</a>
@@ -469,7 +504,8 @@ footer{background:var(--ink);padding-block:0 110px}
             <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Lux+Nightlife+Hub+Av.+Conselheiro+Aguiar+2217+Boa+Viagem+Recife" target="_blank" rel="noopener noreferrer">Abrir rota no mapa <span class="arr"><svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></span></a>
           </div>
           <div class="facts">
-            <div class="fact"><span class="k">Telefone</span><span class="v"><span id="tel">(81) 98826-9712</span><button class="copy" type="button" data-copy="tel">Copiar</button></span></div>
+            <div class="fact"><span class="k">Telefone</span><span class="v"><a id="tel" class="tel" href="tel:+5581988269712">(81) 98826-9712</a><button class="copy" type="button" data-copy="tel">Copiar</button></span></div>
+            <div class="fact"><span class="k">WhatsApp</span><span class="v"><a class="tel" id="wa-link" href="https://wa.me/5581988269712" target="_blank" rel="noopener noreferrer">Falar com a Lux no WhatsApp</a></span></div>
             <div class="fact"><span class="k">Ingressos</span><span class="v">Pelo link oficial de cada festa.</span></div>
           </div>
         </div>
@@ -486,15 +522,15 @@ footer{background:var(--ink);padding-block:0 110px}
         <p>Boate no primeiro andar, Piso Boteco no térreo. Av. Conselheiro Aguiar, 2217, Boa Viagem.</p>
       </div>
       <div>
-        <h4>Lux</h4>
+        <p class="foot-t">Lux</p>
         <ul><li><a href="#agenda">Agenda da semana</a></li><li><a href="#galeria">Galeria</a></li><li><a href="#visite">Como chegar</a></li></ul>
       </div>
       <div class="piso-col">
-        <h4>Piso Boteco</h4>
+        <p class="foot-t">Piso Boteco</p>
         <ul><li><a href="#piso-boteco">Conhecer o bar</a></li><li><a href="#piso-cardapio">Comidas e bebidas</a></li><li><a data-ig href="#" target="_blank" rel="noopener noreferrer">@pisoboteco</a></li></ul>
       </div>
       <div>
-        <h4>Funcionamento</h4>
+        <p class="foot-t">Funcionamento</p>
         <ul><li>Boate: sexta e sábado</li><li>A partir das 23h</li></ul>
       </div>
     </div>
@@ -504,6 +540,14 @@ footer{background:var(--ink);padding-block:0 110px}
     </div>
   </div>
 </footer>
+
+<dialog class="lb" id="lb" aria-label="Foto ampliada">
+  <figure><img id="lb-img" alt=""></figure>
+  <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Fechar foto"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Foto anterior"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+  <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Próxima foto"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
+  <p class="lb-count" id="lb-count" aria-live="polite"></p>
+</dialog>
 
 <nav class="fab-bar hide" id="fab-bar" aria-label="Atalhos">
   <a class="fab fab-agenda" href="#agenda">Agenda</a>
@@ -562,7 +606,7 @@ const AGENDA_SEMANA = [
 ];
 
 /* WHATSAPP da Lux (número já cadastrado no site — confirme com a casa) */
-const CONTATO = { whatsapp:'5581988269712' };
+const CONTATO = { whatsapp:'5581988269712' };   // também usado no link de WhatsApp do bloco "Como chegar"
 
 /* PISO BOTECO */
 const PISO = {
@@ -670,7 +714,7 @@ document.querySelectorAll('img[data-foto]').forEach(img=>{
   if(!f){console.warn('Foto não cadastrada:',k);return;}
   if(usadas.has(k)){console.warn('Foto repetida bloqueada:',k);box?.remove();return;}
   if(f.area!==area){console.warn(`Foto "${k}" (${f.area}) bloqueada na área ${area}`);box?.remove();return;}
-  usadas.add(k);img.src=f.src;if(f.pos)img.style.objectPosition=f.pos;
+  usadas.add(k);img.src=img.closest('.gal,.people-track,.items')?f.src.replace('img/','img/sm/'):f.src;img.dataset.full=f.src;if(f.pos)img.style.objectPosition=f.pos;
 });
 
 /* ---------- Carrosséis em movimento contínuo (galeria da Lux e pessoas no Piso) ----------
@@ -698,6 +742,22 @@ function loopContinuo(track,btnPrev,btnNext,vel){
   track.addEventListener('touchend',()=>setTimeout(()=>{ajusta();pausa=false;},1500),{passive:true});
   track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){passo(1);e.preventDefault();}if(e.key==='ArrowLeft'){passo(-1);e.preventDefault();}});
 }
+/* ---------- Galeria: foto ampliada ---------- */
+const galFotos=[...document.querySelectorAll('#gal .ph img')].map(i=>({src:i.dataset.full||i.src,alt:i.alt}));
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbCount=document.getElementById('lb-count');
+let lbI=0;
+const lbShow=i=>{lbI=(i+galFotos.length)%galFotos.length;lbImg.src=galFotos[lbI].src;lbImg.alt=galFotos[lbI].alt;lbCount.textContent=`${lbI+1} de ${galFotos.length}`;};
+if(lb.showModal){
+  document.getElementById('gal').addEventListener('click',e=>{const ph=e.target.closest('.ph');if(!ph)return;const all=[...document.querySelectorAll('#gal .ph')];lbShow(all.indexOf(ph)%galFotos.length);lb.showModal();});
+  document.getElementById('lb-close').onclick=()=>lb.close();
+  document.getElementById('lb-prev').onclick=()=>lbShow(lbI-1);
+  document.getElementById('lb-next').onclick=()=>lbShow(lbI+1);
+  lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='FIGURE')lb.close();});
+  lb.addEventListener('keydown',e=>{if(e.key==='ArrowRight')lbShow(lbI+1);if(e.key==='ArrowLeft')lbShow(lbI-1);});
+  let lx=null;lb.addEventListener('touchstart',e=>{lx=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',e=>{if(lx===null)return;const dx=e.changedTouches[0].clientX-lx;if(Math.abs(dx)>40)lbShow(lbI+(dx<0?1:-1));lx=null;});
+}
+
 loopContinuo(document.getElementById('gal'),document.getElementById('gal-prev'),document.getElementById('gal-next'),30);
 loopContinuo(document.getElementById('people'),document.getElementById('pp-prev'),document.getElementById('pp-next'),26);
 
@@ -716,6 +776,9 @@ if('IntersectionObserver' in window){
   const fio=new IntersectionObserver(es=>{es.forEach(e=>vis.set(e.target,e.isIntersecting));fab.classList.toggle('hide',[...vis.values()].some(Boolean));},{threshold:0.05});
   [document.querySelector('footer'),document.querySelector('.hero')].forEach(el=>fio.observe(el));
 }else fab.classList.remove('hide');
+
+/* ---------- WhatsApp do bloco Como chegar ---------- */
+if(CONTATO.whatsapp)document.getElementById('wa-link').href=`https://wa.me/${CONTATO.whatsapp}`;
 
 /* ---------- Copiar telefone ---------- */
 document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
