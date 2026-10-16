@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lux Nightlife Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Lux Nightlife Hub, boate em Boa Viagem, Recife (PE). Sexta e sábado a partir das 23h. No térreo, o Piso Boteco. Av. Conselheiro Aguiar, 2217.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600&family=Albert+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap">
+<style>
+/* Layout: noturno leve — títulos geométricos finos (Red Hat Display 400–500), leitura em Albert Sans, vermelho do letreiro LŪX como acento; Piso Boteco em amarelo + serifa do letreiro PISO */
+:root{
+  --ink:#0A0909;
+  --ink-2:#131011;
+  --ink-3:#1E1A1B;
+  --line:#2A2425;
+  --paper:#F4F0E8;
+  --soft:#CFC7BF;
+  --mute:#958A84;
+  --red:#FF2E3F;
+  --yellow:#F6C431;
+  --yellow-ink:#1C1406;
+  --wood:#16100B;
+  --wood-2:#20180F;
+  --wood-3:#33261A;
+  --display:"Red Hat Display",Helvetica,Arial,sans-serif;
+  --body:"Albert Sans",Helvetica,Arial,sans-serif;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --r-sm:10px; --r:16px; --r-lg:22px; --pill:999px;
+  --gut:max(16px,env(safe-area-inset-left,0px));
+  --gutr:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:var(--r-sm)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font-size:14px;font-weight:500;color:var(--mute);letter-spacing:.01em}
+.eyebrow .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:8px;vertical-align:2px}
+
+.ph{border-radius:var(--r);overflow:hidden;background:var(--ink-2)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.ph.zoom:hover img{transform:scale(1.03)}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--ink) 82%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px}
+.top .logo{display:block;line-height:0}
+.top .logo img{height:32px;width:auto}
+.burger{width:46px;height:46px;border-radius:var(--pill);border:1px solid var(--line);background:transparent;color:var(--paper);display:grid;place-items:center;cursor:pointer;transition:border-color .18s,background .18s}
+.burger:hover{background:var(--ink-3)}
+.burger span{display:block;width:17px;height:1.5px;background:currentColor;border-radius:2px;position:relative;transition:background .2s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:currentColor;border-radius:2px;transition:transform .25s ease}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+.menu{position:fixed;top:calc(env(safe-area-inset-top,0px) + 68px);right:var(--gutr);z-index:55;width:min(310px,calc(100vw - 32px));background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.5);transform-origin:top right;transition:opacity .2s ease,transform .2s ease}
+.menu.closed{opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;visibility:hidden}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:var(--r-sm);text-decoration:none;font-family:var(--display);font-weight:500;font-size:16.5px;transition:background .15s}
+.menu a:hover{background:var(--ink-3)}
+.menu a .arr{color:var(--mute);font-weight:400}
+.menu .week{display:block;background:var(--red);color:#fff;margin-bottom:6px;padding:14px}
+.menu .week:hover{background:#FF4C5B}
+.menu .week small{display:block;font-family:var(--body);font-size:13px;font-weight:500;opacity:.85}
+.menu .week strong{display:block;margin-top:2px;font-weight:500;font-size:18px}
+.menu .piso-link{font-family:var(--serif);font-weight:700;font-size:18px}
+.menu .piso-link .arr{color:var(--yellow)}
+.menu hr{border:0;height:1px;background:var(--line);margin:6px 8px}
+.scrim{position:fixed;inset:0;z-index:45;background:rgba(0,0,0,.35);transition:opacity .2s}
+.scrim.closed{opacity:0;pointer-events:none}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;border-radius:var(--pill);font-family:var(--body);font-weight:500;font-size:15px;text-decoration:none;border:1px solid transparent;transition:background .18s,color .18s,border-color .18s,transform .18s}
+.btn:active{transform:scale(.98)}
+.btn .arr{transition:transform .18s}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#FF4C5B}
+.btn-ghost{border-color:color-mix(in srgb,var(--paper) 28%,transparent);color:var(--paper)}
+.btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-yellow{background:var(--yellow);color:var(--yellow-ink)}
+.btn-yellow:hover{background:#FFD95C}
+.btn svg{width:17px;height:17px}
+
+/* Hero com foto de fundo em degradê */
+.hero{position:relative;isolation:isolate;overflow:hidden;margin-top:-70px;padding-top:70px}
+.hero-bg{position:absolute;inset:0 0 0 32%;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg,var(--ink) 30%,color-mix(in srgb,var(--ink) 72%,transparent) 50%,color-mix(in srgb,var(--ink) 15%,transparent) 80%,color-mix(in srgb,var(--ink) 45%,transparent) 100%),
+  linear-gradient(180deg,color-mix(in srgb,var(--ink) 60%,transparent) 0%,transparent 22%,transparent 62%,var(--ink) 100%)}
+.hero .wrap{padding-block:56px 56px;min-height:min(500px,72vh);display:flex;flex-direction:column;justify-content:center}
+.hero-copy{max-width:560px;min-width:0}
+.hero h1{font-size:clamp(44px,6.4vw,84px);font-weight:400;letter-spacing:-.035em;line-height:.98;margin-top:16px}
+.hero h1 .r{color:var(--red);font-weight:500}
+.hero-lede{max-width:40ch;margin-top:18px;font-size:17px;color:var(--soft)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-info{display:flex;flex-wrap:wrap;gap:18px 36px;margin-top:30px}
+.when{display:flex;flex-direction:column;gap:1px;padding-left:12px;border-left:2px solid var(--red)}
+.when strong{font-family:var(--display);font-weight:500;font-size:19px;letter-spacing:-.01em}
+.when span{color:var(--mute);font-size:14.5px}
+.when.muted{border-color:var(--line)}
+
+/* Seções */
+section.blk{padding-block:56px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:22px}
+.sec-head h2{font-size:clamp(30px,3.6vw,44px);margin-top:6px}
+.sec-head p{max-width:42ch;color:var(--soft);font-size:15.5px}
+
+/* Agenda: carrossel */
+.agenda{display:grid;grid-template-columns:1fr minmax(0,360px);gap:clamp(24px,5vw,64px);align-items:center}
+.agenda-copy h2{font-size:clamp(32px,4vw,48px);margin-top:6px}
+.agenda-copy p{color:var(--soft);margin-top:12px;max-width:38ch}
+.car-ctrl{display:flex;align-items:center;gap:10px;margin-top:22px}
+.car-btn{width:44px;height:44px;border-radius:var(--pill);border:1px solid var(--line);background:transparent;color:var(--paper);font-size:17px;cursor:pointer;transition:background .18s,border-color .18s}
+.car-btn:hover{background:var(--ink-3);border-color:var(--mute)}
+.dots{display:flex;gap:6px;margin-left:6px}
+.dots button{width:8px;height:8px;border-radius:var(--pill);border:0;background:var(--line);padding:0;cursor:pointer;transition:width .25s,background .25s}
+.dots button[aria-current="true"]{width:22px;background:var(--red)}
+.past-line{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--mute)}
+.past-line strong{color:var(--soft);font-weight:500}
+
+.carousel{position:relative;width:100%;max-width:360px;justify-self:center}
+.slides{display:grid}
+.slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+.slide.on{opacity:1;visibility:visible}
+.slide a,.slide .frame{display:block;text-decoration:none;border-radius:var(--r-lg);overflow:hidden;background:var(--ink-2);border:1px solid var(--line)}
+.slide a:hover .sig{color:var(--paper)}
+.slide .art{max-height:440px;display:grid;place-items:center;background:var(--ink)}
+.slide .art img{width:100%;height:auto;max-height:440px;object-fit:contain}
+.sig{display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 16px 13px;font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft);transition:color .18s}
+.sig::before,.sig::after{content:"";width:22px;height:1px;background:var(--red)}
+.slide .empty{aspect-ratio:4/5;display:grid;place-items:center;text-align:center;padding:20px;color:var(--mute);font-size:14.5px}
+
+/* Galeria */
+.gal-ctrl{display:flex;gap:8px}
+.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-color:var(--line) transparent;overscroll-behavior-x:contain}
+.gal .ph{flex:0 0 auto;width:clamp(180px,19vw,230px);aspect-ratio:3/4;scroll-snap-align:start}
+
+/* ===== Piso Boteco ===== */
+.piso{background:var(--wood)}
+.piso .eyebrow{color:#BFA488}
+.piso-intro{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(18px,4vw,48px);align-items:center}
+.piso-name{font-family:var(--serif);font-weight:700;font-size:clamp(56px,7.4vw,96px);line-height:.9;letter-spacing:.01em;margin-top:10px}
+.piso-name small{display:flex;justify-content:space-between;max-width:4.7em;font-family:var(--body);font-weight:500;font-size:.15em;letter-spacing:.24em;text-transform:uppercase;color:var(--yellow);border-top:1px solid var(--yellow);padding-top:8px;margin-top:10px}
+.piso-intro p.lede{color:#E2D5C5;font-size:17px;max-width:42ch;margin-top:18px}
+.piso-intro .ctas{margin-top:22px}
+.piso-hero{border-radius:var(--r-lg);overflow:hidden;background:var(--wood-2);aspect-ratio:4/5;max-height:440px;justify-self:end;width:100%;max-width:360px}
+.piso-hero img{width:100%;height:100%;object-fit:cover}
+.people{margin-top:36px}
+.people-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
+.people-head h3{font-family:var(--serif);font-weight:500;font-style:italic;font-size:clamp(22px,2.4vw,28px);letter-spacing:0}
+.people-ctrl{display:flex;gap:8px}
+.people-ctrl .car-btn{border-color:var(--wood-3)}
+.people-ctrl .car-btn:hover{background:var(--wood-2);border-color:var(--yellow)}
+.people-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;scrollbar-width:none;overscroll-behavior-x:contain}
+.people-track::-webkit-scrollbar{display:none}
+.people-track .ph{flex:0 0 auto;width:clamp(170px,18vw,215px);aspect-ratio:3/4;scroll-snap-align:start;background:var(--wood-2)}
+
+.piso-menu{margin-top:44px}
+.menu-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:18px}
+.menu-head h3{font-family:var(--serif);font-weight:700;font-size:clamp(28px,3vw,36px);letter-spacing:0}
+.filters{display:flex;gap:6px;padding:4px;border-radius:var(--pill);background:var(--wood-2)}
+.filter{min-height:38px;padding:0 18px;border-radius:var(--pill);border:0;background:transparent;color:#E2D5C5;font-family:var(--body);font-weight:500;font-size:14.5px;cursor:pointer;transition:background .18s,color .18s}
+.filter:hover{color:var(--yellow)}
+.filter[aria-pressed="true"]{background:var(--yellow);color:var(--yellow-ink)}
+.items{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.item{display:flex;flex-direction:column;gap:10px;transition:opacity .22s ease,transform .22s ease}
+.item.fade{opacity:0;transform:translateY(6px)}
+.item .ph{aspect-ratio:1/1;border-radius:var(--r);background:var(--wood-2)}
+.item .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 2px}
+.item strong{font-weight:500;font-size:15.5px}
+.item em{font-style:normal;color:var(--yellow);font-weight:500;white-space:nowrap}
+.item small{display:block;color:#A99178;font-size:13px;padding:0 2px;margin-top:-8px}
+.menu-note{margin-top:18px;color:#BFA488;font-size:14.5px}
+.menu-note a{color:var(--yellow)}
+
+.piso-news{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:12px 28px;align-items:start;padding-top:24px;border-top:1px solid var(--wood-3)}
+.piso-news h3{font-family:var(--serif);font-weight:700;font-size:24px;letter-spacing:0;padding-top:4px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tab{min-height:36px;padding:0 15px;border-radius:var(--pill);border:1px solid var(--wood-3);background:transparent;color:#E2D5C5;font-family:var(--body);font-weight:500;font-size:14px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.tab:hover{border-color:var(--yellow)}
+.tab[aria-selected="true"]{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
+.panel ul{list-style:none;margin:0;padding:0;display:grid}
+.panel li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--wood-3)}
+.panel li:last-child{border-bottom:0}
+.panel li span:last-child{color:var(--yellow);white-space:nowrap}
+.pending{color:#C9B49C;font-size:15px}
+.pending a{color:var(--yellow)}
+
+/* Final: funcionamento + endereço com foto em degradê até o rodapé */
+.finale{position:relative;isolation:isolate;overflow:hidden;padding-block:84px 56px}
+.finale-bg{position:absolute;inset:0;z-index:-2}
+.finale-bg img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.finale::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(180deg,var(--ink) 0%,color-mix(in srgb,var(--ink) 70%,transparent) 24%,color-mix(in srgb,var(--ink) 55%,transparent) 48%,color-mix(in srgb,var(--ink) 88%,transparent) 78%,var(--ink) 100%)}
+.visit{display:grid;grid-template-columns:1fr 1.15fr;gap:14px}
+.box{background:color-mix(in srgb,var(--ink-2) 80%,transparent);border-radius:var(--r-lg);padding:clamp(20px,3vw,30px);min-width:0;display:flex;flex-direction:column;gap:16px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.box h3{font-size:15px;font-family:var(--body);font-weight:500;color:var(--mute);letter-spacing:.01em}
+.hours-big strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(34px,4vw,48px);letter-spacing:-.03em;line-height:1}
+.hours-big span{display:block;margin-top:6px;font-size:18px;color:var(--soft)}
+.box .note{color:var(--mute);font-size:14.5px}
+.box .note a{color:var(--yellow)}
+.addr{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.8vw,34px);letter-spacing:-.02em;line-height:1.1}
+.addr small{display:block;font-family:var(--body);font-size:15.5px;color:var(--soft);margin-top:6px;letter-spacing:0}
+.facts{display:grid}
+.fact{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line);align-items:baseline;font-size:15px}
+.fact .k{color:var(--mute);font-size:14px}
+.fact .v{min-width:0}
+.copy{margin-left:8px;background:none;border:1px solid var(--line);color:var(--mute);font-family:var(--body);font-size:12.5px;padding:3px 10px;border-radius:var(--pill);cursor:pointer}
+.copy:hover{color:var(--paper);border-color:var(--paper)}
+
+/* Rodapé */
+footer{background:var(--ink);padding-block:0 110px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-block:32px;border-top:1px solid var(--line)}
+.foot img{height:40px;width:auto}
+.foot p{color:var(--mute);font-size:14.5px;margin-top:14px;max-width:30ch}
+.foot h4{font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--mute);margin-bottom:12px;letter-spacing:0}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--red)}
+.foot .piso-col a:hover{color:var(--yellow)}
+.credits{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+.credits a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--paper);padding:7px 14px;border:1px solid var(--line);border-radius:var(--pill);transition:border-color .18s}
+.credits a:hover{border-color:var(--paper)}
+.credits svg{width:15px;height:15px}
+
+/* Botões centrais flutuantes: Agenda (vermelho) + Piso Boteco (amarelo) */
+.fab-bar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;transform:translateX(-50%);display:flex;gap:6px;padding:5px;border-radius:var(--pill);background:color-mix(in srgb,var(--ink) 72%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .25s ease,opacity .25s ease;max-width:calc(100vw - 24px)}
+.fab-bar.hide{opacity:0;transform:translateX(-50%) translateY(20px);pointer-events:none}
+.fab{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:0 22px;border-radius:var(--pill);text-decoration:none;white-space:nowrap;transition:background .18s,transform .18s}
+.fab:active{transform:scale(.97)}
+.fab-agenda{background:var(--red);color:#fff;font-family:var(--display);font-weight:500;font-size:16px}
+.fab-agenda:hover{background:#FF4C5B}
+.fab-piso{background:var(--yellow);color:var(--yellow-ink);font-family:var(--serif);font-weight:700;font-size:17px}
+.fab-piso:hover{background:#FFD95C}
+.fab-piso small{font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+@media (max-width:380px){.fab{padding:0 16px}.fab-piso small{display:none}}
+
+.rv{transition:opacity .5s ease,transform .5s ease}
+.js .rv.pre{opacity:.001;transform:translateY(16px)}
+
+@media (max-width:980px){
+  .items{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hero-bg{inset:0}
+  .hero::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 55%,transparent) 0%,color-mix(in srgb,var(--ink) 35%,transparent) 30%,color-mix(in srgb,var(--ink) 82%,transparent) 62%,var(--ink) 100%)}
+  .hero .wrap{min-height:0;padding-block:110px 36px}
+  .hero h1{font-size:clamp(42px,12vw,64px)}
+  .agenda{grid-template-columns:1fr;gap:18px}
+  .agenda .carousel{order:2;max-width:320px}
+  .agenda-copy p{display:none}
+  .car-ctrl{justify-content:center;margin-top:0;order:3}
+  .agenda-copy .car-ctrl{display:none}
+  .car-mobile{display:flex!important}
+  .piso-intro{grid-template-columns:1fr}
+  .piso-hero{order:-1;justify-self:stretch;max-width:none;aspect-ratio:4/3.6;max-height:none}
+  .people-track .ph{width:42vw}
+  .items{grid-template-columns:repeat(2,1fr);gap:10px}
+  .menu-head{flex-direction:column;align-items:flex-start}
+  .piso-news{grid-template-columns:1fr}
+  .visit{grid-template-columns:1fr}
+  section.blk{padding-block:44px}
+  .finale{padding-block:60px 44px}
+}
+@media (max-width:420px){.foot{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .rv.pre{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Lux Nightlife Hub, início"><img src="img/logo.png" alt="lūx .nightlife hub" width="635" height="404"></a>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  </div>
+</header>
+<div class="scrim closed" id="scrim"></div>
+<nav class="menu closed" id="menu" aria-label="Menu principal">
+  <a class="week" href="#agenda"><small>Agenda da semana</small><strong id="menu-week">Sexta e sábado</strong></a>
+  <a href="#galeria">Galeria <span class="arr">→</span></a>
+  <a href="#visite">Funcionamento e endereço <span class="arr">→</span></a>
+  <hr>
+  <a class="piso-link" href="#piso-boteco">Piso Boteco <span class="arr">→</span></a>
+</nav>
+
+<main id="inicio">
+  <section class="hero" aria-labelledby="hero-t">
+    <div class="hero-bg"><img src="img/letreiro.webp" data-foto="letreiro" alt="" fetchpriority="high"></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span>Boa Viagem, Recife</p>
+        <h1 id="hero-t">A noite tem <span class="r">endereço.</span></h1>
+        <p class="hero-lede">Pista, DJ e festa temática no primeiro andar da Conselheiro Aguiar.</p>
+        <div class="ctas">
+          <a class="btn btn-red" href="#agenda">Ver a agenda <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#visite">Como chegar</a>
+        </div>
+        <div class="hero-info">
+          <div class="when"><strong>Sexta e sábado</strong><span>A partir das 23h</span></div>
+          <div class="when muted"><strong>Conselheiro Aguiar, 2217</strong><span>Boa Viagem</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LUX: AGENDA (carrossel) ===== -->
+  <section class="blk" id="agenda" aria-labelledby="ag-t">
+    <div class="wrap">
+      <div class="agenda">
+        <div class="agenda-copy">
+          <p class="eyebrow">Lux Nightlife Hub</p>
+          <h2 id="ag-t">Agenda da semana</h2>
+          <p>Toque na arte para falar com a Lux no WhatsApp sobre a festa.</p>
+          <div class="car-ctrl" aria-label="Controles da agenda">
+            <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior">←</button>
+            <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte">→</button>
+            <div class="dots" data-dots></div>
+          </div>
+          <p class="past-line">Já passaram por aqui: <strong>BaiLux</strong>, a festa dos anos 2000, e <strong>Alterego Night</strong>.</p>
+        </div>
+        <div class="carousel" id="carousel" aria-roledescription="carrossel" aria-label="Artes da agenda da semana">
+          <div class="slides" id="slides"></div>
+        </div>
+        <div class="car-ctrl car-mobile" style="display:none" aria-label="Controles da agenda">
+          <button class="car-btn" type="button" data-car="prev" aria-label="Arte anterior">←</button>
+          <div class="dots" data-dots></div>
+          <button class="car-btn" type="button" data-car="next" aria-label="Próxima arte">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LUX: GALERIA ===== -->
+  <section class="blk" id="galeria" aria-labelledby="gal-t" style="padding-top:12px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Galeria</p><h2 id="gal-t">Noites na Lux</h2></div>
+        <div class="gal-ctrl">
+          <button class="car-btn" type="button" id="gal-prev" aria-label="Fotos anteriores">←</button>
+          <button class="car-btn" type="button" id="gal-next" aria-label="Próximas fotos">→</button>
+        </div>
+      </div>
+      <div class="gal" id="gal" tabindex="0" aria-label="Galeria de fotos da Lux, role para os lados">
+        <div class="ph"><img src="img/palco.webp" data-foto="palco" alt="Cantor ao microfone no palco com luz roxa" loading="lazy"></div>
+        <div class="ph"><img src="img/pista-shots.webp" data-foto="pista-shots" alt="Amigas brindando na pista" loading="lazy"></div>
+        <div class="ph"><img src="img/letreiro-azul.webp" data-foto="letreiro-azul" alt="Convidada diante do letreiro LŪX branco sob luz azul" loading="lazy"></div>
+        <div class="ph"><img src="img/copo-dj.webp" data-foto="copo-dj" alt="Amigas com copo da Lux ao lado da cabine do DJ" loading="lazy"></div>
+        <div class="ph"><img src="img/cuervo-selfie.webp" data-foto="cuervo-selfie" alt="Convidada dançando sob neon amarelo" loading="lazy"></div>
+        <div class="ph"><img src="img/casal-copos.webp" data-foto="casal-copos" alt="Casal sorrindo com copos pretos da Lux" loading="lazy"></div>
+        <div class="ph"><img src="img/pista-verde.webp" data-foto="pista-verde" alt="Convidada sob o asterisco verde iluminado" loading="lazy"></div>
+        <div class="ph"><img src="img/festa-ranger.webp" data-foto="festa-ranger" alt="Público na pista com fantasia de Power Ranger vermelho" loading="lazy"></div>
+        <div class="ph"><img src="img/galera.webp" data-foto="galera" alt="Dois amigos rindo dentro da casa" loading="lazy"></div>
+        <div class="ph"><img src="img/bailux-parede.webp" data-foto="bailux-parede" alt="Convidada no painel de revistas dos anos 2000 da BaiLux" loading="lazy"></div>
+        <div class="ph"><img src="img/pista-camiseta.webp" data-foto="pista-camiseta" alt="Convidado sorrindo e apontando para a câmera" loading="lazy"></div>
+        <div class="ph"><img src="img/heineken.webp" data-foto="heineken" alt="Convidada dançando na pista" loading="lazy"></div>
+        <div class="ph"><img src="img/bailux-oculos.webp" data-foto="bailux-oculos" alt="Óculos com BAI LUX pintado nas lentes" loading="lazy"></div>
+        <div class="ph"><img src="img/2000s-vibes.webp" data-foto="2000s-vibes" alt="Duas amigas com globo espelhado no sofá" loading="lazy"></div>
+        <div class="ph"><img src="img/bailux-polaroid.webp" data-foto="bailux-polaroid" alt="Polaroid de amigos com globo espelhado e logo da Lux em rosa" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PISO BOTECO ===== -->
+  <section class="blk piso" id="piso-boteco" aria-labelledby="piso-t">
+    <div class="wrap">
+      <div class="piso-intro">
+        <div>
+          <p class="eyebrow">No térreo da Lux</p>
+          <h2 id="piso-t" class="piso-name">PISO<small><span>Bar</span><span>Boteco</span></small></h2>
+          <p class="lede">O térreo agora é o Piso. Mesa de madeira, drink gelado, gin bem servido e lugar pra cantar parabéns. Dá pra começar a noite aqui e subir depois, ou ficar por aqui mesmo.</p>
+          <div class="ctas">
+            <a class="btn btn-yellow" data-ig href="#" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg>@pisoboteco</a>
+            <a class="btn btn-ghost" href="#piso-cardapio">Comidas e bebidas</a>
+          </div>
+        </div>
+        <div class="piso-hero"><img src="img/piso-logo.webp" data-foto="piso-logo" alt="Letreiro iluminado PISO Bar Boteco na parede do bar" loading="lazy"></div>
+      </div>
+
+      <div class="people" aria-labelledby="people-t">
+        <div class="people-head">
+          <h3 id="people-t">Quem passa pelo Piso</h3>
+          <div class="people-ctrl">
+            <button class="car-btn" type="button" id="pp-prev" aria-label="Fotos anteriores">←</button>
+            <button class="car-btn" type="button" id="pp-next" aria-label="Próximas fotos">→</button>
+          </div>
+        </div>
+        <div class="people-track" id="people" tabindex="0" aria-roledescription="carrossel" aria-label="Fotos de clientes no Piso Boteco">
+          <div class="ph"><img src="img/piso-pessoa-1.webp" data-foto="piso-pessoa-1" alt="Cliente sorrindo com drink diante do letreiro do Piso" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-aniversario.webp" data-foto="piso-aniversario" alt="Cliente comemorando aniversário com bolo no Piso" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-pessoa-3.webp" data-foto="piso-pessoa-3" alt="Cliente brindando com taça na mão" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-letreiro.webp" data-foto="piso-letreiro" alt="Cliente diante do letreiro PISO Bar Boteco" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-pessoa-2.webp" data-foto="piso-pessoa-2" alt="Cliente segurando taça de drink laranja" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-letreiro-2.webp" data-foto="piso-letreiro-2" alt="Cliente com camisa da seleção fazendo pose no Piso" loading="lazy"></div>
+          <div class="ph"><img src="img/piso-amigas.webp" data-foto="piso-amigas" alt="Duas amigas sorrindo diante da bandeira do Brasil" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="piso-menu" id="piso-cardapio">
+        <div class="menu-head">
+          <h3>Comidas e bebidas</h3>
+          <div class="filters" role="group" aria-label="Filtrar cardápio" id="filters">
+            <button class="filter" type="button" data-f="Comidas" aria-pressed="true">Comidas</button>
+            <button class="filter" type="button" data-f="Bebidas" aria-pressed="false">Bebidas</button>
+          </div>
+        </div>
+        <div class="items" id="items" aria-live="polite"></div>
+        <p class="menu-note" id="menu-note"></p>
+      </div>
+
+      <div class="piso-news">
+        <h3>Novidades</h3>
+        <div>
+          <div class="tabs" role="tablist" aria-label="Novidades do Piso Boteco" id="piso-tabs"></div>
+          <div class="panel" role="tabpanel" id="piso-panel" tabindex="0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL: FUNCIONAMENTO + ENDEREÇO ===== -->
+  <section class="finale" id="visite" aria-labelledby="vi-t">
+    <div class="finale-bg"><img src="img/copo-azul.webp" data-foto="copo-azul" alt="" loading="lazy"></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Lux Nightlife Hub</p><h2 id="vi-t">Te vejo na pista</h2></div>
+      </div>
+      <div class="visit">
+        <div class="box">
+          <h3>Funcionamento da boate</h3>
+          <div class="hours-big"><strong>Sexta e sábado</strong><span>A partir das 23h</span></div>
+          <p class="note">O horário de cada festa vem na arte do evento. O Piso Boteco funciona à parte, <a href="#piso-boteco">veja no perfil do bar</a>.</p>
+        </div>
+        <div class="box">
+          <h3>Como chegar</h3>
+          <p class="addr">Av. Conselheiro Aguiar, 2217<small>Boa Viagem, Recife – PE · CEP 51111-011</small></p>
+          <div class="ctas" style="margin-top:0">
+            <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Lux+Nightlife+Hub+Av.+Conselheiro+Aguiar+2217+Boa+Viagem+Recife" target="_blank" rel="noopener noreferrer">Abrir rota no mapa <span class="arr" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="facts">
+            <div class="fact"><span class="k">Telefone</span><span class="v"><span id="tel">(81) 98826-9712</span><button class="copy" type="button" data-copy="tel">Copiar</button></span></div>
+            <div class="fact"><span class="k">Ingressos</span><span class="v">Pelo link oficial de cada festa.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="img/logo.png" alt="lūx .nightlife hub" width="635" height="404" loading="lazy">
+        <p>Boate no primeiro andar, Piso Boteco no térreo. Av. Conselheiro Aguiar, 2217, Boa Viagem.</p>
+      </div>
+      <div>
+        <h4>Lux</h4>
+        <ul><li><a href="#agenda">Agenda da semana</a></li><li><a href="#galeria">Galeria</a></li><li><a href="#visite">Como chegar</a></li></ul>
+      </div>
+      <div class="piso-col">
+        <h4>Piso Boteco</h4>
+        <ul><li><a href="#piso-boteco">Conhecer o bar</a></li><li><a href="#piso-cardapio">Comidas e bebidas</a></li><li><a data-ig href="#" target="_blank" rel="noopener noreferrer">@pisoboteco</a></li></ul>
+      </div>
+      <div>
+        <h4>Funcionamento</h4>
+        <ul><li>Boate: sexta e sábado</li><li>A partir das 23h</li></ul>
+      </div>
+    </div>
+    <div class="credits">
+      <span>© <span id="ano">2026</span> Lux Nightlife Hub</span>
+      <a id="credit" href="#" target="_blank" rel="noopener noreferrer">Feito pela Results.AG <svg aria-hidden="true"><use href="#i-ig"/></svg><span id="credit-ig">@results.ag</span></a>
+    </div>
+  </div>
+</footer>
+
+<nav class="fab-bar hide" id="fab-bar" aria-label="Atalhos">
+  <a class="fab fab-agenda" href="#agenda">Agenda</a>
+  <a class="fab fab-piso" href="#piso-boteco">Piso <small>Boteco</small></a>
+</nav>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ======================= DADOS DO SITE — edite aqui ======================= */
+
+/* FOTOS: cada foto entra UMA vez. area "lux" ou "piso": foto do Piso só aparece na seção do Piso e vice-versa. */
+const FOTOS = {
+  'letreiro':        {src:'img/letreiro.webp',        pos:'50% 32%', area:'lux'},
+  'bailux-parede':   {src:'img/bailux-parede.webp',   pos:'55% 30%', area:'lux'},
+  'bailux-oculos':   {src:'img/bailux-oculos.webp',   pos:'50% 40%', area:'lux'},
+  'festa-ranger':    {src:'img/festa-ranger.webp',    pos:'50% 40%', area:'lux'},
+  'bailux-polaroid': {src:'img/bailux-polaroid.webp', pos:'50% 50%', area:'lux'},
+  'palco':           {src:'img/palco.webp',           pos:'45% 30%', area:'lux'},
+  'pista-verde':     {src:'img/pista-verde.webp',     pos:'40% 35%', area:'lux'},
+  'copo-dj':         {src:'img/copo-dj.webp',         pos:'35% 40%', area:'lux'},
+  'pista-shots':     {src:'img/pista-shots.webp',     pos:'50% 35%', area:'lux'},
+  'cuervo-selfie':   {src:'img/cuervo-selfie.webp',   pos:'50% 35%', area:'lux'},
+  'galera':          {src:'img/galera.webp',          pos:'50% 40%', area:'lux'},
+  'heineken':        {src:'img/heineken.webp',        pos:'50% 40%', area:'lux'},
+  '2000s-vibes':     {src:'img/2000s-vibes.webp',     pos:'50% 45%', area:'lux'},
+  'copo-azul':       {src:'img/copo-azul.webp',       pos:'50% 28%', area:'lux'},   // fundo do final
+  'letreiro-azul':   {src:'img/letreiro-azul.webp',   pos:'50% 30%', area:'lux'},
+  'casal-copos':     {src:'img/casal-copos.webp',     pos:'50% 35%', area:'lux'},
+  'pista-camiseta':  {src:'img/pista-camiseta.webp',  pos:'50% 30%', area:'lux'},
+  'piso-aniversario':{src:'img/piso-aniversario.webp',pos:'40% 35%', area:'piso'},
+  'piso-letreiro':   {src:'img/piso-letreiro.webp',   pos:'50% 30%', area:'piso'},
+  'piso-letreiro-2': {src:'img/piso-letreiro-2.webp', pos:'50% 25%', area:'piso'},
+  'piso-amigas':     {src:'img/piso-amigas.webp',     pos:'50% 35%', area:'piso'},
+  'piso-drinks':     {src:'img/piso-drinks.webp',     pos:'50% 60%', area:'piso'},
+  'piso-gin':        {src:'img/piso-gin.webp',        pos:'50% 50%', area:'piso'},
+  'piso-sushi':      {src:'img/piso-sushi.webp',      pos:'50% 50%', area:'piso'},
+  'piso-burger':     {src:'img/piso-burger.webp',     pos:'40% 55%', area:'piso'},
+  'piso-coquetel':   {src:'img/piso-coquetel.webp',   pos:'50% 40%', area:'piso'},
+  'piso-logo':       {src:'img/piso-logo.webp',       pos:'50% 45%', area:'piso'},
+  'piso-gins':       {src:'img/piso-gins.webp',       pos:'50% 35%', area:'piso'},
+  'piso-batata':     {src:'img/piso-batata.webp',     pos:'50% 55%', area:'piso'},
+  'piso-pessoa-1':   {src:'img/piso-pessoa-1.webp',   pos:'50% 25%', area:'piso'},
+  'piso-pessoa-2':   {src:'img/piso-pessoa-2.webp',   pos:'50% 30%', area:'piso'},
+  'piso-pessoa-3':   {src:'img/piso-pessoa-3.webp',   pos:'60% 30%', area:'piso'}
+};
+
+/* AGENDA DA SEMANA (boate). Artes oficiais no carrossel.
+   Quando a data passa, a arte sai do carrossel. link: só o link oficial de ingressos;
+   sem link, o clique abre o WhatsApp abaixo com o nome da festa. */
+const AGENDA_SEMANA = [
+  { dia:'Sexta',  nome:'Deu Match',          data:'2026-10-16', arte:'img/arte-sexta-deu-match.webp',
+    lineup:'Helton Lima, Gama Crew e Jr Pressão', link:'' },
+  { dia:'Sábado', nome:'Oktober Funk Night', data:'2026-10-17', arte:'img/arte-sabado-oktober-funk.webp',
+    lineup:'Silvana Salazar, Xavier (funk set) e Wagner Santos, com participação de Veluna e Xande Bap', link:'' }
+];
+
+/* WHATSAPP da Lux (número já cadastrado no site — confirme com a casa) */
+const CONTATO = { whatsapp:'5581988269712' };
+
+/* PISO BOTECO */
+const PISO = {
+  instagram:'https://www.instagram.com/pisoboteco/',
+  /* CARDÁPIO: categoria "Comidas" ou "Bebidas"; foto = chave em FOTOS (área piso).
+     Nome e preço oficiais: preencha quando o bar confirmar. Sem foto, o item aparece só em texto. */
+  cardapio:[
+    { categoria:'Comidas', foto:'piso-sushi',    nome:'Sushi',                  preco:'' },
+    { categoria:'Comidas', foto:'piso-burger',   nome:'Hambúrguer com fritas',  preco:'' },
+    { categoria:'Comidas', foto:'piso-batata',   nome:'Batata frita com molho', preco:'' },
+    { categoria:'Bebidas', foto:'piso-drinks',   nome:'Drinks no copo do Piso', preco:'' },
+    { categoria:'Bebidas', foto:'piso-gin',      nome:'Gin tônica',             preco:'' },
+    { categoria:'Bebidas', foto:'piso-coquetel', nome:'Coquetel',               preco:'' },
+    { categoria:'Bebidas', foto:'piso-gins',     nome:'Gins na taça do Piso',   preco:'' }
+  ],
+  promocoes:[], eventos:[],   // itens: { nome:'', descricao:'', preco:'' }
+  reservas:''                 // ex.: 'Reservas pelo direct do @pisoboteco'
+};
+
+/* CRÉDITO DO SITE */
+const CREDITO = { nome:'Results.AG', instagram:'https://www.instagram.com/results.ag/', handle:'@results.ag' };
+
+/* ======================= FIM DOS DADOS ======================= */
+
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hoje=new Date();hoje.setHours(0,0,0,0);
+const passou=d=>d&&new Date(d+'T23:59:59')<hoje;
+const ddmm=d=>new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Agenda: carrossel ---------- */
+const ativos=AGENDA_SEMANA.filter(e=>e.arte&&!passou(e.data));
+const slidesEl=document.getElementById('slides');
+if(ativos.length){
+  slidesEl.innerHTML=ativos.map((e,i)=>{
+    const msg=`Olá! Quero informações sobre a ${e.nome}, ${e.dia==='Sexta'?'sexta-feira':'sábado'} ${ddmm(e.data)}, na LUX.`;
+    const href=e.link||(CONTATO.whatsapp?`https://wa.me/${CONTATO.whatsapp}?text=${encodeURIComponent(msg)}`:'');
+    const inner=`<div class="art"><img src="${esc(e.arte)}" alt="Arte oficial da ${esc(e.nome)}, ${esc(e.dia.toLowerCase())} ${esc(ddmm(e.data))}${e.lineup?'. Line-up: '+esc(e.lineup):''}"${i?' loading="lazy"':''}></div><div class="sig">${esc(e.dia)}</div>`;
+    const label=e.link?`Ingressos da ${esc(e.nome)}`:`Falar no WhatsApp sobre a ${esc(e.nome)}`;
+    return `<div class="slide${i?'':' on'}" role="group" aria-roledescription="slide" aria-label="${i+1} de ${ativos.length}: ${esc(e.dia)}" ${i?'aria-hidden="true"':''}>${href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${inner}</a>`:`<div class="frame">${inner}</div>`}</div>`;
+  }).join('');
+  document.getElementById('menu-week').textContent=ativos.map(e=>e.nome).join(' · ');
+}else{
+  slidesEl.innerHTML=`<div class="slide on"><div class="frame"><div class="empty">As artes da próxima sexta e do próximo sábado entram aqui assim que forem divulgadas.</div><div class="sig">Em breve</div></div></div>`;
+  document.getElementById('menu-week').textContent='Em atualização';
+}
+const slides=[...slidesEl.children];
+let atual=0,timer=null,pausado=false;
+document.querySelectorAll('[data-dots]').forEach(d=>{d.innerHTML=slides.map((_,i)=>`<button type="button" aria-label="Ver arte ${i+1}" data-i="${i}"></button>`).join('');});
+const ir=i=>{
+  atual=(i+slides.length)%slides.length;
+  slides.forEach((s,k)=>{s.classList.toggle('on',k===atual);s.toggleAttribute('aria-hidden',k!==atual);s.querySelectorAll('a').forEach(a=>a.tabIndex=k===atual?0:-1);});
+  document.querySelectorAll('[data-dots] button').forEach(b=>b.setAttribute('aria-current',+b.dataset.i===atual));
+};
+const play=()=>{clearInterval(timer);if(!reduz&&!pausado&&slides.length>1)timer=setInterval(()=>ir(atual+1),5000);};
+document.querySelectorAll('[data-car]').forEach(b=>b.addEventListener('click',()=>{ir(atual+(b.dataset.car==='next'?1:-1));play();}));
+document.querySelectorAll('[data-dots]').forEach(d=>d.addEventListener('click',e=>{const b=e.target.closest('button');if(b){ir(+b.dataset.i);play();}}));
+const car=document.getElementById('carousel');
+const pausa=v=>{pausado=v;v?clearInterval(timer):play();};
+car.addEventListener('mouseenter',()=>pausa(true));car.addEventListener('mouseleave',()=>pausa(false));
+car.addEventListener('focusin',()=>pausa(true));car.addEventListener('focusout',()=>pausa(false));
+car.addEventListener('touchstart',()=>pausa(true),{passive:true});car.addEventListener('touchend',()=>setTimeout(()=>pausa(false),4000));
+let x0=null;car.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+car.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){ir(atual+(dx<0?1:-1));}x0=null;});
+if(slides.length<2)document.querySelectorAll('.car-ctrl').forEach(c=>c.style.visibility='hidden');
+ir(0);play();
+
+/* ---------- Links ---------- */
+document.querySelectorAll('[data-ig]').forEach(a=>{if(PISO.instagram)a.href=PISO.instagram;else a.hidden=true;});
+document.getElementById('credit').href=CREDITO.instagram;document.getElementById('credit-ig').textContent=CREDITO.handle;
+document.getElementById('ano').textContent=new Date().getFullYear();
+
+/* ---------- Piso: cardápio com filtros ---------- */
+const itemsEl=document.getElementById('items');
+itemsEl.innerHTML=PISO.cardapio.map(i=>`<article class="item" data-cat="${esc(i.categoria)}">${i.foto?`<div class="ph zoom"><img data-foto="${esc(i.foto)}" alt="${esc(i.nome)} no Piso Boteco" loading="lazy"></div>`:''}<div class="t"><strong>${esc(i.nome)}</strong>${i.preco?`<em>${esc(i.preco)}</em>`:''}</div><small>${i.categoria==='Comidas'?'Comida':'Bebida'}</small></article>`).join('');
+document.getElementById('menu-note').innerHTML=`Cardápio completo e valores no${PISO.instagram?` <a href="${esc(PISO.instagram)}" target="_blank" rel="noopener noreferrer">@pisoboteco</a>`:' perfil do bar'}.`;
+const filtrar=f=>{
+  document.querySelectorAll('.filter').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
+  const its=[...itemsEl.children];
+  its.forEach(el=>el.classList.add('fade'));
+  setTimeout(()=>{its.forEach(el=>{el.hidden=!(f==='tudo'||el.dataset.cat===f);});requestAnimationFrame(()=>its.forEach(el=>el.classList.remove('fade')));},reduz?0:180);
+};
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.filter');if(b)filtrar(b.dataset.f);});
+[...itemsEl.children].forEach(el=>{el.hidden=el.dataset.cat!=='Comidas';});
+
+/* ---------- Piso: novidades ---------- */
+const ABAS=[['promocoes','Promoções'],['eventos','Eventos do bar'],['reservas','Reservas']];
+const tabs=document.getElementById('piso-tabs'),panel=document.getElementById('piso-panel');
+const igLink=PISO.instagram?` Acompanhe no <a href="${esc(PISO.instagram)}" target="_blank" rel="noopener noreferrer">@pisoboteco</a>.`:'';
+const renderAba=k=>{
+  const v=PISO[k];
+  if(k==='reservas')panel.innerHTML=v?`<p>${esc(v)}</p>`:`<p class="pending">Reservas e aniversários são combinados direto com o bar.${igLink}</p>`;
+  else panel.innerHTML=v&&v.length?`<ul>${v.map(i=>`<li><span>${esc(i.nome)}${i.descricao?` · ${esc(i.descricao)}`:''}</span><span>${esc(i.preco||'')}</span></li>`).join('')}</ul>`:`<p class="pending">Ainda não publicado aqui.${igLink}</p>`;
+  tabs.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.k===k));
+};
+tabs.innerHTML=ABAS.map(([k,n])=>`<button class="tab" role="tab" type="button" data-k="${k}" aria-controls="piso-panel">${n}</button>`).join('');
+tabs.addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)renderAba(t.dataset.k);});
+renderAba('promocoes');
+
+/* ---------- Piso: carrossel de pessoas ---------- */
+const pp=document.getElementById('people');
+const ppStep=()=>{const c=pp.querySelector('.ph');return c?c.getBoundingClientRect().width+10:220;};
+const ppGo=d=>{const max=pp.scrollWidth-pp.clientWidth-4;
+  if(d>0&&pp.scrollLeft>=max)pp.scrollTo({left:0,behavior:reduz?'auto':'smooth'});
+  else if(d<0&&pp.scrollLeft<=4)pp.scrollTo({left:pp.scrollWidth,behavior:reduz?'auto':'smooth'});
+  else pp.scrollBy({left:d*ppStep(),behavior:reduz?'auto':'smooth'});};
+let ppT=null,ppPause=false;
+const ppPlay=()=>{clearInterval(ppT);if(!reduz&&!ppPause)ppT=setInterval(()=>ppGo(1),3500);};
+document.getElementById('pp-prev').onclick=()=>{ppGo(-1);ppPlay();};
+document.getElementById('pp-next').onclick=()=>{ppGo(1);ppPlay();};
+const ppP=v=>{ppPause=v;v?clearInterval(ppT):ppPlay();};
+pp.addEventListener('mouseenter',()=>ppP(true));pp.addEventListener('mouseleave',()=>ppP(false));
+pp.addEventListener('focusin',()=>ppP(true));pp.addEventListener('focusout',()=>ppP(false));
+pp.addEventListener('touchstart',()=>ppP(true),{passive:true});pp.addEventListener('touchend',()=>setTimeout(()=>ppP(false),4000));
+pp.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){ppGo(1);e.preventDefault();}if(e.key==='ArrowLeft'){ppGo(-1);e.preventDefault();}});
+if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?ppPlay():clearInterval(ppT))).observe(pp);}else ppPlay();
+
+/* ---------- Fotos: registro, sem repetição e sem misturar áreas ---------- */
+const usadas=new Set();
+document.querySelectorAll('img[data-foto]').forEach(img=>{
+  const k=img.dataset.foto,f=FOTOS[k],box=img.closest('.ph,.piso-hero,.finale-bg,.hero-bg');
+  const area=img.closest('#piso-boteco')?'piso':'lux';
+  if(!f){console.warn('Foto não cadastrada:',k);return;}
+  if(usadas.has(k)){console.warn('Foto repetida bloqueada:',k);box?.remove();return;}
+  if(f.area!==area){console.warn(`Foto "${k}" (${f.area}) bloqueada na área ${area}`);box?.remove();return;}
+  usadas.add(k);img.src=f.src;if(f.pos)img.style.objectPosition=f.pos;
+});
+
+/* ---------- Menu ---------- */
+const burger=document.getElementById('burger'),menu=document.getElementById('menu'),scrim=document.getElementById('scrim');
+const setMenu=open=>{menu.classList.toggle('closed',!open);scrim.classList.toggle('closed',!open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');if(open)menu.querySelector('a').focus();};
+burger.addEventListener('click',()=>setMenu(menu.classList.contains('closed')));
+scrim.addEventListener('click',()=>setMenu(false));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.classList.contains('closed')){setMenu(false);burger.focus();}});
+
+/* ---------- Botões flutuantes: somem no topo e no rodapé ---------- */
+const fab=document.getElementById('fab-bar');
+if('IntersectionObserver' in window){
+  const vis=new Map();
+  const fio=new IntersectionObserver(es=>{es.forEach(e=>vis.set(e.target,e.isIntersecting));fab.classList.toggle('hide',[...vis.values()].some(Boolean));},{threshold:0.05});
+  [document.querySelector('footer'),document.querySelector('.hero')].forEach(el=>fio.observe(el));
+}else fab.classList.remove('hide');
+
+/* ---------- Galeria ---------- */
+const gal=document.getElementById('gal'),step=()=>Math.max(200,gal.clientWidth*.7);
+document.getElementById('gal-prev').onclick=()=>gal.scrollBy({left:-step(),behavior:'smooth'});
+document.getElementById('gal-next').onclick=()=>gal.scrollBy({left:step(),behavior:'smooth'});
+
+/* ---------- Copiar telefone ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
+  const el=document.getElementById(btn.dataset.copy);
+  const ok=()=>{btn.textContent='Copiado';setTimeout(()=>btn.textContent='Copiar',1600);};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);getSelection().removeAllRanges();getSelection().addRange(r);};
+  navigator.clipboard?navigator.clipboard.writeText(el.textContent).then(ok,sel):sel();
+}));
+</script>
+
+</body>
+</html>
