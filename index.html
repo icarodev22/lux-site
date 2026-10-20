@@ -59,8 +59,8 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 12px)}
-body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 12px)}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -820,6 +820,46 @@ footer{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 #aniversario{padding-bottom:clamp(28px,4vw,48px)!important}
 #piso-boteco{--fade:clamp(56px,7vw,96px)!important;padding-top:calc(var(--fade) + 8px)!important}
 #piso-boteco::before{background:linear-gradient(180deg,#0A0A0A 0%,#0d0b09 45%,var(--wood) 100%)!important}
+
+/* =====================================================================
+   AJUSTE MOBILE — ritmo vertical único, abertura sem vazio, barra compacta
+   ===================================================================== */
+/* Entrada das seções: nunca esconde o conteúdo (só um deslocamento curto) */
+.js main>section.sec-pre:not(#hero)>.wrap{opacity:1!important;transform:translate3d(0,16px,0)}
+/* Se o navegador não sustentar o "sticky", a abertura não reserva altura extra (sem tela preta vazia) */
+@supports not (position:sticky){.sx.sx-on{height:100svh}}
+@media (max-width:760px){
+  :root{--sec:44px}
+  #agenda{padding-top:20px!important;padding-bottom:var(--sec)!important}
+  #galeria{padding-top:var(--sec)!important;padding-bottom:var(--sec)!important}
+  .cc{height:calc(var(--ch) * 1.22)}
+  .cc-ctrl{margin-top:0}
+  .all-photos{margin-top:16px}
+  #aniversario{padding-top:var(--sec)!important;padding-bottom:28px!important}
+  .bday{margin-top:16px}
+  .bday .ph{aspect-ratio:4/3.4}
+  .bday-copy{gap:12px;padding-top:14px}
+  .bday-steps li{padding-block:9px;grid-template-columns:36px 1fr;line-height:1.45}
+  .bday-steps li::before{font-size:19px}
+  #piso-boteco{--fade:48px!important;padding-top:calc(var(--fade) + 4px)!important;padding-bottom:var(--sec)!important}
+  .piso-intro{margin-top:16px}
+  .people{margin-top:28px}
+  .people-top{margin-bottom:10px}
+  .people-track{padding-bottom:0;gap:8px}
+  .people-track .ph{width:40vw;border-radius:12px}
+  #visite{--fade:48px!important;padding-top:calc(var(--fade) + 4px)!important;padding-bottom:var(--sec)!important}
+  #visite .info{margin-top:14px}
+  footer{padding-top:12px!important}
+}
+/* Barra flutuante compacta: uma borda só, abas encostadas */
+.fab-bar{padding:3px;gap:3px;border-radius:13px;background:rgba(20,20,20,.82);box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.fab{min-height:38px;padding:0 15px;border-radius:10px;font-size:14.5px}
+.fab-agenda{font-size:15px}
+.fab-piso{border:0!important;background:#262626!important;color:var(--yellow)}
+.fab-piso:hover{background:#2f2f2f!important}
+.fab-piso small{font-size:9.5px;letter-spacing:.14em}
+footer{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!important}
+#aniversario,#piso-boteco,#visite{scroll-margin-bottom:60px}
 </style>
 </head>
 <body>
@@ -1074,36 +1114,36 @@ document.documentElement.classList.add('js');
    w = largura do arquivo grande (para o srcset); a miniatura fica em img/sm/ com 560px. */
 const FOTOS = {
   'copo-dj':         {src:'img/copo-dj.webp',         w:1440, pos:'40% 35%', area:'lux'},   // abertura
-  'palco':           {src:'img/palco.webp',           w:1100, pos:'45% 30%', area:'lux'},
-  'pista-shots':     {src:'img/pista-shots.webp',     w:1000, pos:'50% 35%', area:'lux'},
-  'letreiro-azul':   {src:'img/letreiro-azul.webp',   w:900,  pos:'50% 30%', area:'lux'},
+  'palco':           {src:'img/palco.webp',           w:1440, pos:'45% 30%', area:'lux'},
+  'pista-shots':     {src:'img/pista-shots.webp',     w:1280, pos:'50% 35%', area:'lux'},
+  'letreiro-azul':   {src:'img/letreiro-azul.webp',   w:1440,  pos:'50% 30%', area:'lux'},
   'festa-ranger':    {src:'img/festa-ranger.webp',    w:1280, pos:'50% 40%', area:'lux'},
-  'cuervo-selfie':   {src:'img/cuervo-selfie.webp',   w:1000, pos:'50% 35%', area:'lux'},
-  'casal-copos':     {src:'img/casal-copos.webp',     w:900,  pos:'50% 35%', area:'lux'},
-  'pista-verde':     {src:'img/pista-verde.webp',     w:1100, pos:'40% 35%', area:'lux'},
-  'copo-azul':       {src:'img/copo-azul.webp',       w:1000, pos:'50% 28%', area:'lux'},
-  'galera':          {src:'img/galera.webp',          w:1100, pos:'50% 40%', area:'lux'},
-  'bailux-parede':   {src:'img/bailux-parede.webp',   w:1100, pos:'55% 30%', area:'lux'},
-  'pista-camiseta':  {src:'img/pista-camiseta.webp',  w:900,  pos:'50% 30%', area:'lux'},
-  'heineken':        {src:'img/heineken.webp',        w:1000, pos:'50% 40%', area:'lux'},
-  'bailux-oculos':   {src:'img/bailux-oculos.webp',   w:1100, pos:'50% 40%', area:'lux'},
+  'cuervo-selfie':   {src:'img/cuervo-selfie.webp',   w:1280, pos:'50% 35%', area:'lux'},
+  'casal-copos':     {src:'img/casal-copos.webp',     w:1440,  pos:'50% 35%', area:'lux'},
+  'pista-verde':     {src:'img/pista-verde.webp',     w:1440, pos:'40% 35%', area:'lux'},
+  'copo-azul':       {src:'img/copo-azul.webp',       w:1280, pos:'50% 28%', area:'lux'},
+  'galera':          {src:'img/galera.webp',          w:1440, pos:'50% 40%', area:'lux'},
+  'bailux-parede':   {src:'img/bailux-parede.webp',   w:1600, pos:'55% 30%', area:'lux'},
+  'pista-camiseta':  {src:'img/pista-camiseta.webp',  w:1440,  pos:'50% 30%', area:'lux'},
+  'heineken':        {src:'img/heineken.webp',        w:1440, pos:'50% 40%', area:'lux'},
+  'bailux-oculos':   {src:'img/bailux-oculos.webp',   w:1600, pos:'50% 40%', area:'lux'},
   'bailux-polaroid': {src:'img/bailux-polaroid.webp', w:1024, pos:'50% 50%', area:'lux'},
-  '2000s-vibes':     {src:'img/2000s-vibes.webp',     w:1100, pos:'50% 45%', area:'lux'},
+  '2000s-vibes':     {src:'img/2000s-vibes.webp',     w:1254, pos:'50% 45%', area:'lux'},
   'piso-logo':       {src:'img/piso-logo.webp',       w:941,  pos:'50% 45%', area:'piso'},
-  'piso-pessoa-1':   {src:'img/piso-pessoa-1.webp',   w:975,  pos:'50% 25%', area:'piso'},
-  'piso-gins':       {src:'img/piso-gins.webp',       w:975,  pos:'50% 35%', area:'piso'},
-  'piso-aniversario':{src:'img/piso-aniversario.webp',w:1000, pos:'40% 35%', area:'piso'},
-  'piso-burger':     {src:'img/piso-burger.webp',     w:900,  pos:'40% 55%', area:'piso'},
-  'piso-pessoa-3':   {src:'img/piso-pessoa-3.webp',   w:975,  pos:'60% 30%', area:'piso'},
+  'piso-pessoa-1':   {src:'img/piso-pessoa-1.webp',   w:1440,  pos:'50% 25%', area:'piso'},
+  'piso-gins':       {src:'img/piso-gins.webp',       w:979,  pos:'50% 35%', area:'piso'},
+  'piso-aniversario':{src:'img/piso-aniversario.webp',w:1448, pos:'40% 35%', area:'piso'},
+  'piso-burger':     {src:'img/piso-burger.webp',     w:1080,  pos:'40% 55%', area:'piso'},
+  'piso-pessoa-3':   {src:'img/piso-pessoa-3.webp',   w:1080,  pos:'60% 30%', area:'piso'},
   'piso-letreiro':   {src:'img/piso-letreiro.webp',   w:943,  pos:'50% 30%', area:'piso'},
-  'piso-drinks':     {src:'img/piso-drinks.webp',     w:1000, pos:'50% 60%', area:'piso'},
-  'piso-pessoa-2':   {src:'img/piso-pessoa-2.webp',   w:975,  pos:'50% 30%', area:'piso'},
-  'piso-sushi':      {src:'img/piso-sushi.webp',      w:900,  pos:'50% 50%', area:'piso'},
-  'piso-letreiro-2': {src:'img/piso-letreiro-2.webp', w:1000, pos:'50% 25%', area:'piso'},
-  'piso-gin':        {src:'img/piso-gin.webp',        w:1000, pos:'50% 50%', area:'piso'},
-  'piso-amigas':     {src:'img/piso-amigas.webp',     w:1000, pos:'50% 35%', area:'piso'},
+  'piso-drinks':     {src:'img/piso-drinks.webp',     w:1272, pos:'50% 60%', area:'piso'},
+  'piso-pessoa-2':   {src:'img/piso-pessoa-2.webp',   w:1080,  pos:'50% 30%', area:'piso'},
+  'piso-sushi':      {src:'img/piso-sushi.webp',      w:1080,  pos:'50% 50%', area:'piso'},
+  'piso-letreiro-2': {src:'img/piso-letreiro-2.webp', w:1023, pos:'50% 25%', area:'piso'},
+  'piso-gin':        {src:'img/piso-gin.webp',        w:1402, pos:'50% 50%', area:'piso'},
+  'piso-amigas':     {src:'img/piso-amigas.webp',     w:1281, pos:'50% 35%', area:'piso'},
   'piso-batata':     {src:'img/piso-batata.webp',     w:941,  pos:'50% 55%', area:'piso'},
-  'piso-coquetel':   {src:'img/piso-coquetel.webp',   w:900,  pos:'50% 40%', area:'piso'}
+  'piso-coquetel':   {src:'img/piso-coquetel.webp',   w:1080,  pos:'50% 40%', area:'piso'}
 };
 
 /* AGENDA PELA PLANILHA DO GOOGLE
@@ -1281,7 +1321,7 @@ document.querySelectorAll('img[data-foto]').forEach(img=>{
   const sm=f.src.replace('img/','img/sm/');
   img.onerror=()=>{img.onerror=null;img.removeAttribute('srcset');img.src=f.src;};   // se faltar a miniatura, usa a grande
   img.sizes=img.dataset.sizes||'100vw';
-  img.srcset=`${sm} 560w, ${f.src} ${f.w||1000}w`;
+  img.srcset=`${sm} 640w, ${f.src} ${f.w||1000}w`;
   if(!img.getAttribute('src'))img.src=f.src;
   img.dataset.full=f.src;
   if(f.pos)img.style.objectPosition=f.pos;
