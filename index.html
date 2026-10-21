@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="img/hero/copo-dj-1920.webp" imagesrcset="img/hero/copo-dj-900.webp 900w, img/hero/copo-dj-1440.webp 1440w, img/hero/copo-dj-1920.webp 1920w, img/hero/copo-dj-2560.webp 2560w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="img/hero/pista-1920.webp" imagesrcset="img/hero/pista-900.webp 900w, img/hero/pista-1440.webp 1440w, img/hero/pista-1920.webp 1920w, img/hero/pista-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NightClub", "name": "Lux Nightlife Hub", "url": "https://lux-site-tawny.vercel.app/", "image": "https://lux-site-tawny.vercel.app/img/og-lux.jpg", "sameAs": ["https://www.instagram.com/lux.nightlifehub/"], "address": {"@type": "PostalAddress", "streetAddress": "Av. Conselheiro Aguiar, 2217", "addressLocality": "Recife", "addressRegion": "PE", "postalCode": "51111-011", "addressCountry": "BR"}}</script>
 <style>
 /* Conceito: "a parede do letreiro" — a página é a parede preta da Lux à noite; a única luz é o vermelho do letreiro LŪX.
@@ -860,6 +860,13 @@ footer{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .fab-piso small{font-size:9.5px;letter-spacing:.14em}
 footer{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!important}
 #aniversario,#piso-boteco,#visite{scroll-margin-bottom:60px}
+
+/* Abertura fixa: foto da pista em tela cheia, sem animação de rolagem */
+.sx{height:100vh;height:100svh}
+.sx-final{opacity:1!important;pointer-events:auto!important;transform:none!important}
+.sx-media{left:0!important;top:0!important;width:100%!important;height:100%!important;border-radius:0!important;box-shadow:none}
+.sx-media .sx-hq{opacity:1!important}
+.sx-title .w{display:none}
 </style>
 </head>
 <body>
@@ -915,8 +922,7 @@ footer{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!important}
   <!-- ===== HERO ===== -->
   <section class="sx" id="hero" aria-labelledby="hero-t">
     <div class="sx-stage">
-      <div class="sx-bg" aria-hidden="true"><video id="hero-img" class="sx-bgvid" autoplay muted loop playsinline preload="auto" poster="video/lux-hero-poster.webp" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="video/lux-hero.mp4" type="video/mp4"><source src="video/lux-hero.webm" type="video/webm"></video></div>
-      <div class="sx-media"><img src="img/hero/copo-dj-1920.webp" srcset="img/hero/copo-dj-900.webp 900w, img/hero/copo-dj-1440.webp 1440w, img/hero/copo-dj-1920.webp 1920w, img/hero/copo-dj-2560.webp 2560w" sizes="100vw" width="1440" height="1519" alt="Duas amigas rindo com o copo da Lux ao lado da cabine do DJ" fetchpriority="high" decoding="async"><img class="sx-hq" src="img/hero/pista-1920.webp" srcset="img/hero/pista-900.webp 900w, img/hero/pista-1440.webp 1440w, img/hero/pista-1920.webp 1920w, img/hero/pista-2400.webp 2400w" sizes="100vw" width="1440" height="1920" alt="Pista da Lux cheia, com convidada sorrindo sob as luzes azuis" decoding="async" fetchpriority="low"></div>
+      <div class="sx-media"><img class="sx-hq" src="img/hero/pista-1920.webp" srcset="img/hero/pista-900.webp 900w, img/hero/pista-1440.webp 1440w, img/hero/pista-1920.webp 1920w, img/hero/pista-2400.webp 2400w" sizes="100vw" width="1440" height="1920" alt="Pista da Lux cheia, com convidada sorrindo sob as luzes azuis" decoding="async" fetchpriority="high"></div>
       <h1 class="sx-title" id="hero-t" aria-label="Feel The Lux"><span class="w w1" aria-hidden="true">Feel The</span><span class="w w2" aria-hidden="true">Lux</span></h1>
       <div class="sx-final">
         <div class="wrap sx-final-in">
@@ -928,7 +934,6 @@ footer{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!important}
           </div>
         </div>
       </div>
-      <a class="sx-cue" href="#agenda" aria-label="Rolar até a agenda">Role</a>
     </div>
   </section>
 
@@ -1584,7 +1589,7 @@ document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('clic
   // Estado inicial: quadrado compacto e centralizado — min(360px, 72vw) × o mesmo valor. Só cresce com a rolagem.
   const SX={startSize:360,startMaxVW:.72,startRadius:22,mediaZoom:1,scrollDistance:.8,holdDistance:.16,smoothing:.14,
             mobile:{startRadius:18,scrollDistance:.6,holdDistance:.1}};
-  if(reduz)return;                                   // movimento reduzido: fica aberta, sem rolagem presa
+  return;                                            // animação de expansão desligada: abertura fixa em tela cheia
   const st=sx.querySelector('.sx-stage'),media=sx.querySelector('.sx-media'),img=media.querySelector('img'),hq=media.querySelector('.sx-hq'),
         w1=sx.querySelector('.w1'),w2=sx.querySelector('.w2'),fin=sx.querySelector('.sx-final'),cue=sx.querySelector('.sx-cue');
   const mqM=matchMedia('(max-width:899px)');   // abaixo disso a frase fica acima e abaixo da foto
